@@ -1,8 +1,10 @@
 package com.ketris.core
 
 import java.awt.Dimension
+import java.awt.Point
 import javax.swing.JFrame
 import javax.swing.JPanel
+import javax.swing.WindowConstants
 
 class Window(title: String) : JFrame(title) {
     init {
@@ -16,5 +18,9 @@ class Window(title: String) : JFrame(title) {
         windowPane.add(canvas)
         contentPane = windowPane
         pack()
+
+        isVisible = true
+        location = Point(800, 410)
+        defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
     }
 }
