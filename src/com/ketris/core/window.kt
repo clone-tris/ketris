@@ -9,13 +9,9 @@ import javax.swing.WindowConstants
 class Window(title: String) : JFrame(title) {
     init {
         val windowPane = JPanel()
-        val canvas = object : JPanel() {
-            override fun getPreferredSize(): Dimension {
-                return Dimension(400, 600)
-            }
-        }
-
+        val canvas = Canvas(400, 600)
         windowPane.add(canvas)
+
         contentPane = windowPane
         pack()
 
