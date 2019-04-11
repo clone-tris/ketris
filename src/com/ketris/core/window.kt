@@ -1,22 +1,27 @@
 package com.ketris.core
 
-import java.awt.Dimension
 import java.awt.Point
 import javax.swing.JFrame
 import javax.swing.JPanel
 import javax.swing.WindowConstants
 
 class Window(title: String) : JFrame(title) {
-    init {
-        val windowPane = JPanel()
-        val canvas = Canvas(400, 600)
-        windowPane.add(canvas)
+  init {
+    val windowPane = JPanel()
+    val canvas = Canvas(400, 600)
+    windowPane.add(canvas)
 
-        contentPane = windowPane
-        pack()
+    contentPane = windowPane
+    pack()
 
-        isVisible = true
-        location = Point(800, 410)
-        defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
-    }
+    isVisible = true
+    // at home
+//        location = Point(760, 410)
+
+    // at work
+    location = Point(1200, 410)
+    defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
+
+    canvas.start()
+  }
 }
