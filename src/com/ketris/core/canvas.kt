@@ -6,8 +6,8 @@ import java.awt.Graphics
 import java.awt.Graphics2D
 import java.awt.RenderingHints
 import java.awt.Toolkit
+import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
-import java.awt.event.KeyListener
 import java.util.concurrent.TimeUnit
 import javax.swing.JPanel
 
@@ -38,14 +38,8 @@ class Canvas(width: Int, height: Int) : JPanel() {
     println(REFRESH_INTERVAL_MS)
     println(TimeUnit.SECONDS.toMillis(1))
 
-    addKeyListener(object : KeyListener {
-      override fun keyTyped(e: KeyEvent?) {
-
-      }
-
+    addKeyListener(object : KeyAdapter() {
       override fun keyPressed(e: KeyEvent?) {
-
-
         when (e?.keyCode) {
           KeyEvent.VK_W -> wIsDown = true
           KeyEvent.VK_S -> sIsDown = true
