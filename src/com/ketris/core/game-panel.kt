@@ -13,7 +13,7 @@ import javax.swing.JPanel
 const val FRAMES_PER_SECOND = 60
 val REFRESH_INTERVAL_MS: Long = TimeUnit.SECONDS.toMillis(1) / FRAMES_PER_SECOND
 
-class Canvas(width: Int, height: Int) : JPanel() {
+class GamePanel(width: Int, height: Int) : JPanel() {
   private var player = Player(100f, 100f, 30f, 30f)
   private var timeLastRunMs = System.currentTimeMillis()
   private var isRunning: Boolean = true
