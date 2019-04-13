@@ -30,7 +30,7 @@ class Screen : IScreen {
   override fun paint(g: Graphics2D) {
 //     Before painting :
 //     - in debug mode showing the guide is essential to know what is being done
-//        drawGuide()
+    Painter(g).drawGuide()
 //
 
     g.color = Color(54, 214, 250)

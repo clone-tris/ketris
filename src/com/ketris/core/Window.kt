@@ -9,7 +9,7 @@ import javax.swing.WindowConstants
 class Window(title: String) : JFrame(title) {
   init {
     val windowPane = JPanel()
-    val canvas = GamePanel(400, 600)
+    val canvas = GamePanel(Config.CANVAS_WIDTH, Config.CANVAS_HEIGHT)
     windowPane.add(canvas)
 
     contentPane = windowPane
