@@ -44,7 +44,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
 
   private fun redraw(): Long {
     val t = System.currentTimeMillis()
-    val deltaTime: Float = (t - timeLastRunMs) / 1000f
+    val deltaTime: Int = (t - timeLastRunMs).toInt()
     updateState(deltaTime)
     timeLastRunMs = t
 
@@ -60,10 +60,11 @@ class GamePanel(width: Int, height: Int) : JPanel() {
   }
 
   /**
-   * @param dt Delta time since last render devided by 1000
+   * @param dt Delta time since last render in Miliseconds
    */
-  private fun updateState(dt: Float) {
-    val translate = 400 * dt
+  private fun updateState(dt: Int) {
+    // move 400 pixels per second
+    val translate = 400 * dt / 1000f
 
     if (wIsDown) {
       player.y -= translate
