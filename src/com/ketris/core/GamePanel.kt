@@ -112,7 +112,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
     // TODO: add debugging stuff.
 
     Toolkit.getDefaultToolkit().sync()
-    g.dispose()
+    g2D.dispose()
   }
 
   private fun waitForPaint() {
