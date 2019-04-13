@@ -1,4 +1,4 @@
-package com.ketris.core
+package com.ketris.core.framework
 
 import java.awt.Graphics2D
 

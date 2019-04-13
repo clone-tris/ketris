@@ -1,5 +1,6 @@
-package com.ketris.core
+package com.ketris.core.screens.game
 
+import com.ketris.core.framework.*
 import java.awt.Color
 import java.awt.Graphics2D
 

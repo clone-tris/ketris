@@ -1,5 +1,6 @@
-package com.ketris.core
+package com.ketris.core.framework
 
+import com.ketris.core.screens.game.Screen
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.Graphics
@@ -14,7 +15,6 @@ const val FRAMES_PER_SECOND = 60
 val REFRESH_INTERVAL_MS: Long = TimeUnit.SECONDS.toMillis(1) / FRAMES_PER_SECOND
 
 class GamePanel(width: Int, height: Int) : JPanel() {
-  private var player = Player(100f, 100f, 30f, 30f)
   private var timeLastRunMs = System.currentTimeMillis()
   private var isRunning: Boolean = true
   private val redrawLock = java.lang.Object()
