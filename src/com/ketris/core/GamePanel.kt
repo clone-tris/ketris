@@ -18,6 +18,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
   private var timeLastRunMs = System.currentTimeMillis()
   private var isRunning: Boolean = true
   private val redrawLock = java.lang.Object()
+  private val screen = Screen()
 
   init {
     preferredSize = Dimension(width, height)
@@ -45,7 +46,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
   private fun redraw(): Long {
     val t = System.currentTimeMillis()
     val deltaTime: Int = (t - timeLastRunMs).toInt()
-    updateState(deltaTime)
+    screen.update(deltaTime)
     timeLastRunMs = t
 
     // asynchronously signals the paint to happen in the swing thread
@@ -57,36 +58,6 @@ class GamePanel(width: Int, height: Int) : JPanel() {
     waitForPaint()
 
     return System.currentTimeMillis() - t
-  }
-
-  /**
-   * @param dt Delta time since last render in Miliseconds
-   */
-  private fun updateState(dt: Int) {
-    // move 400 pixels per second
-    val translate = 400 * dt / 1000f
-
-    if (wIsDown) {
-      player.y -= translate
-    }
-    if (sIsDown) {
-      player.y += translate
-    }
-
-    if (aIsDown) {
-      player.x -= translate
-    }
-
-    if (dIsDown) {
-      player.x += translate
-    }
-  }
-
-  private fun paint(g: Graphics2D) {
-    g.color = Color(54, 214, 250)
-    g.fillRect(
-      player.x.toInt(), player.y.toInt(), player.width.toInt(), player.height.toInt()
-    )
   }
 
   override fun paintComponent(g: Graphics?) {
@@ -101,11 +72,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
     rh[RenderingHints.KEY_RENDERING] = RenderingHints.VALUE_RENDER_QUALITY
     g2D.setRenderingHints(rh)
 
-    // Before painting :
-    // - in debug mode showing the guide is essential to know what is being done
-//        drawGuide()
-//
-    paint(g2D)
+    screen.paint(g2D)
 
     // After painting :
     // - in debug mode Showing some info about current location and frame rates are essential
