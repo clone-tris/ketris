@@ -1,6 +1,9 @@
 package com.ketris.core.screens.game
 
 import com.ketris.core.Config
+import com.ketris.core.screens.game.Colors.DEFAULT_SQUARE_BACKGROUND
+import com.ketris.core.screens.game.Colors.DEFAULT_SQUARE_BORDER
+import com.ketris.core.screens.game.Constants.SQUARE_BORDER_WIDTH
 import com.ketris.core.screens.game.Constants.SQUARE_WIDTH
 import java.awt.BasicStroke
 import java.awt.Color
@@ -11,6 +14,41 @@ class Painter(val g: Graphics2D) {
     g.stroke = BasicStroke(strokeWidth.toFloat())
     g.color = color
     g.drawLine(x1, y1, x2, y2)
+  }
+
+  fun drawSquareAt(row: Int, column: Int, color: Color? = null) {
+    val background: Color = color ?: DEFAULT_SQUARE_BACKGROUND
+    val border: Color = color?.darker() ?: DEFAULT_SQUARE_BORDER
+
+    drawSquare(
+      column * SQUARE_WIDTH, row * SQUARE_WIDTH, SQUARE_WIDTH, SQUARE_WIDTH, background, border
+    )
+  }
+
+  private fun drawSquare(
+    x: Int, y: Int, width: Int, height: Int, backgroundColor: Color, borderColor: Color
+  ) {
+    g.color = backgroundColor
+    g.fillRect(x, y, width, height)
+
+    drawLine(x, y, x + SQUARE_WIDTH - 1, y, borderColor, SQUARE_BORDER_WIDTH)
+    drawLine(x, y, x, y + SQUARE_WIDTH - 1, borderColor, SQUARE_BORDER_WIDTH)
+    drawLine(
+      x + SQUARE_WIDTH - 1,
+      y,
+      x + SQUARE_WIDTH - 1,
+      y + SQUARE_WIDTH - 1,
+      borderColor,
+      SQUARE_BORDER_WIDTH
+    )
+    drawLine(
+      x,
+      y + SQUARE_WIDTH - 1,
+      x + SQUARE_WIDTH - 1,
+      y + SQUARE_WIDTH - 1,
+      borderColor,
+      SQUARE_BORDER_WIDTH
+    )
   }
 
   fun drawGuide() {

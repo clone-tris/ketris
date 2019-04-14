@@ -1,6 +1,7 @@
 package com.ketris.core.screens.game
 
 import com.ketris.core.framework.*
+import com.ketris.core.screens.game.Constants.SQUARE_WIDTH
 import java.awt.Color
 import java.awt.Graphics2D
 
@@ -28,14 +29,17 @@ class Screen : IScreen {
   }
 
   override fun paint(g: Graphics2D) {
-//     Before painting :
-//     - in debug mode showing the guide is essential to know what is being done
-    Painter(g).drawGuide()
-//
+    val p = Painter(g)
 
-    g.color = Color(54, 214, 250)
-    g.fillRect(
-      player.x.toInt(), player.y.toInt(), player.width.toInt(), player.height.toInt()
-    )
+    paintBackground(p)
+    paintPlayer(p)
+  }
+
+  private fun paintBackground(p: Painter) {
+    p.drawGuide()
+  }
+
+  private fun paintPlayer(p: Painter) {
+    p.drawSquareAt((player.y / SQUARE_WIDTH).toInt(), (player.x / SQUARE_WIDTH).toInt())
   }
 }
