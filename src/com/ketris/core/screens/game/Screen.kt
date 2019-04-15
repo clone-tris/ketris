@@ -8,9 +8,11 @@ import java.awt.Graphics2D
 class Screen : IScreen {
   private val player = Player(100f, 100f, 30f, 30f)
 
+
   override fun update(dt: Int) {
     // move 400 pixels per second
     val translate = 400 * dt / 1000f
+    // todo : try both thrad and if
 
     if (wIsDown) {
       player.y -= translate
@@ -28,11 +30,18 @@ class Screen : IScreen {
     }
   }
 
-  override fun paint(g: Graphics2D) {
-    val p = Painter(g)
+  override fun paint(g: Graphics2D, dt: Int) {
+    val p = Painter(g, dt)
 
     paintBackground(p)
     paintPlayer(p)
+
+    // keep the following last as it need to be on top of everything
+    paintDebugSection(p)
+  }
+
+  private fun paintDebugSection(p: Painter) {
+    p.drawText(text = p.dt.toString(), x = 10, y = 10)
   }
 
   private fun paintBackground(p: Painter) {

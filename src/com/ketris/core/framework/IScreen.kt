@@ -10,6 +10,7 @@ interface IScreen {
 
   /**
    * @param g Graphics2D instance to paint with
+   * @param dt Delta time since last render in Miliseconds
    */
-  fun paint(g: Graphics2D)
+  fun paint(g: Graphics2D, dt: Int)
 }

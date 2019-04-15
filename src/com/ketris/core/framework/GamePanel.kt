@@ -19,6 +19,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
   private var isRunning: Boolean = true
   private val redrawLock = java.lang.Object()
   private val screen = Screen()
+  private var dt: Int = 0
 
   init {
     preferredSize = Dimension(width, height)
@@ -46,6 +47,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
   private fun redraw(): Long {
     val t = System.currentTimeMillis()
     val deltaTime: Int = (t - timeLastRunMs).toInt()
+    dt = deltaTime
     screen.update(deltaTime)
     timeLastRunMs = t
 
@@ -72,7 +74,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
     rh[RenderingHints.KEY_RENDERING] = RenderingHints.VALUE_RENDER_QUALITY
     g2D.setRenderingHints(rh)
 
-    screen.paint(g2D)
+    screen.paint(g2D, dt)
 
     // After painting :
     // - in debug mode Showing some info about current location and frame rates are essential
