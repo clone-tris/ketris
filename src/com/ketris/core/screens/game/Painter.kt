@@ -1,6 +1,7 @@
 package com.ketris.core.screens.game
 
 import com.ketris.core.Config
+import com.ketris.core.framework.GameFPS
 import com.ketris.core.screens.game.Colors.DEFAULT_SQUARE_BACKGROUND
 import com.ketris.core.screens.game.Constants.SQUARE_BORDER_WIDTH
 import com.ketris.core.screens.game.Constants.SQUARE_WIDTH
@@ -9,7 +10,7 @@ import java.awt.Color
 import java.awt.Font
 import java.awt.Graphics2D
 
-class Painter(val g: Graphics2D, var dt: Int) {
+class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS) {
   private fun drawLine(x1: Int, y1: Int, x2: Int, y2: Int, color: Color, strokeWidth: Int) {
     g.stroke = BasicStroke(strokeWidth.toFloat())
     g.color = color

@@ -1,5 +1,6 @@
 package com.ketris.core.framework
 
+import com.ketris.core.screens.game.Painter
 import com.ketris.core.screens.game.Screen
 import java.awt.Color
 import java.awt.Dimension
@@ -20,6 +21,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
   private val redrawLock = java.lang.Object()
   private val screen = Screen()
   private var dt: Int = 0
+  private var fps = GameFPS()
 
   init {
     preferredSize = Dimension(width, height)
@@ -74,7 +76,9 @@ class GamePanel(width: Int, height: Int) : JPanel() {
     rh[RenderingHints.KEY_RENDERING] = RenderingHints.VALUE_RENDER_QUALITY
     g2D.setRenderingHints(rh)
 
-    screen.paint(g2D, dt)
+    val p = Painter(g2D, dt, fps)
+    screen.paint(p)
+    fps.increment()
 
     // After painting :
     // - in debug mode Showing some info about current location and frame rates are essential

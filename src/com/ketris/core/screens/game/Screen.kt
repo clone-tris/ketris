@@ -2,12 +2,9 @@ package com.ketris.core.screens.game
 
 import com.ketris.core.framework.*
 import com.ketris.core.screens.game.Constants.SQUARE_WIDTH
-import java.awt.Color
-import java.awt.Graphics2D
 
 class Screen : IScreen {
   private val player = Player(100f, 100f, 30f, 30f)
-
 
   override fun update(dt: Int) {
     // move 400 pixels per second
@@ -30,9 +27,7 @@ class Screen : IScreen {
     }
   }
 
-  override fun paint(g: Graphics2D, dt: Int) {
-    val p = Painter(g, dt)
-
+  override fun paint(p: Painter) {
     paintBackground(p)
     paintPlayer(p)
 
@@ -41,7 +36,11 @@ class Screen : IScreen {
   }
 
   private fun paintDebugSection(p: Painter) {
-    p.drawText(text = p.dt.toString(), x = 10, y = 10)
+    paintFPS(p)
+  }
+
+  private fun paintFPS(p: Painter) {
+    p.drawText(text = p.fps.value().toString(), x = 10, y = 10)
   }
 
   private fun paintBackground(p: Painter) {
