@@ -22,7 +22,7 @@ class Screen : IScreen {
 
   fun keyPressed(e: KeyEvent?) {
     when (e?.keyCode) {
-      KeyEvent.VK_W -> commander.defyGravity()
+      KeyEvent.VK_W -> commander.rotate()
       KeyEvent.VK_S -> commander.fallDown()
       KeyEvent.VK_A -> commander.moveLeft()
       KeyEvent.VK_D -> commander.moveRight()

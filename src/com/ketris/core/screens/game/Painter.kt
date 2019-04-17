@@ -27,26 +27,26 @@ class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS) {
   }
 
   fun drawShape(shape: Shape) {
-    shape.grid.forEach { coordinate ->
+    shape.grid.forEach { square ->
       drawSquareAt(
-        shape.row + coordinate[0], shape.column + coordinate[1], shape.color
+        shape.row + square.row, shape.column + square.column, shape.color ?: square.color
       )
     }
   }
 
   fun drawSquareAt(row: Int, column: Int, color: Color) {
-    val border: Color = color.darker()
+    val border = color.darker()
 
     drawSquare(
-      column * SQUARE_WIDTH, row * SQUARE_WIDTH, SQUARE_WIDTH, SQUARE_WIDTH, color, border
+      column * SQUARE_WIDTH, row * SQUARE_WIDTH, SQUARE_WIDTH, color, border
     )
   }
 
   private fun drawSquare(
-    x: Int, y: Int, width: Int, height: Int, backgroundColor: Color, borderColor: Color
+    x: Int, y: Int, width: Int, backgroundColor: Color, borderColor: Color
   ) {
     g.color = backgroundColor
-    g.fillRect(x, y, width, height)
+    g.fillRect(x, y, width, width)
 
     drawLine(x, y, x + SQUARE_WIDTH - 1, y, borderColor, SQUARE_BORDER_WIDTH)
     drawLine(x, y, x, y + SQUARE_WIDTH - 1, borderColor, SQUARE_BORDER_WIDTH)
@@ -72,11 +72,11 @@ class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS) {
     val canvasHeight = Config.CANVAS_HEIGHT
     val canvasWidth = Config.CANVAS_WIDTH
 
-    for (i in 0 until CANVAS_WIDTH_IN_SQUARES + 1) {
+    for (i in 0 until CANVAS_HEIGHT_IN_SQUARES + 1) {
       drawLine(0, i * SQUARE_WIDTH, canvasWidth, i * SQUARE_WIDTH, Colors.GUIDE, 1)
     }
 
-    for (i in 0 until CANVAS_HEIGHT_IN_SQUARES + 1) {
+    for (i in 0 until CANVAS_WIDTH_IN_SQUARES + 1) {
       drawLine(i * SQUARE_WIDTH, 0, i * SQUARE_WIDTH, canvasHeight, Colors.GUIDE, 1)
     }
   }

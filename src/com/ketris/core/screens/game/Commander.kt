@@ -5,29 +5,27 @@ import java.awt.Color
 class Commander {
   val player = Shape(
     listOf(
-      listOf(0, 0), listOf(0, 1), listOf(0, 2), listOf(1, 1)
-    ), 0, 0, Colors.DEFAULT_SQUARE_COLOR
+      Square(0, 0), Square(0, 1), Square(0, 2), Square(1, 1)
+    ), 0, 0, Color.RED
   )
 
-  val opponent = Shape(
-    emptyList(), 0, 0, Color.ORANGE
-  )
+  val opponent = Shape(emptyList(), 0, 0)
 
   private fun mayMove(rowDirection: Int, columnDirection: Int): Boolean {
     val futurePlayer = player.grid.map {
-      listOf(
-        it[0] + player.row + rowDirection, it[1] + player.column + columnDirection
+      Square(
+        it.row + player.row + rowDirection, it.column + player.column + columnDirection
       )
     }
 
     val opponentMatrix = opponent.grid.map {
-      listOf(
-        it[0] + opponent.row, it[1] + opponent.column
+      Square(
+        it.row + opponent.row, it.column + opponent.column
       )
     }
 
     val collides =
-      futurePlayer.any { cell -> opponentMatrix.any { opponentCell -> opponentCell == cell } }
+      futurePlayer.any { cell -> opponentMatrix.any { opponentCell -> opponentCell.coordinates() == cell.coordinates() } }
 
     return !collides
   }
@@ -58,7 +56,7 @@ class Commander {
     move(+1, 0)
   }
 
-  fun defyGravity() {
-    move(-1, 0)
+  fun rotate() {
+
   }
 }
