@@ -1,9 +1,11 @@
 package com.ketris.core.screens.game
 
 import com.ketris.core.Config
+import com.ketris.core.Config.CANVAS_HEIGHT_IN_SQUARES
+import com.ketris.core.Config.CANVAS_WIDTH_IN_SQUARES
 import com.ketris.core.framework.engine.GameFPS
-import com.ketris.core.screens.game.Constants.SQUARE_BORDER_WIDTH
-import com.ketris.core.screens.game.Constants.SQUARE_WIDTH
+import com.ketris.core.Config.SQUARE_BORDER_WIDTH
+import com.ketris.core.Config.SQUARE_WIDTH
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.Font
@@ -70,11 +72,11 @@ class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS) {
     val canvasHeight = Config.CANVAS_HEIGHT
     val canvasWidth = Config.CANVAS_WIDTH
 
-    for (i in 0 until canvasHeight / SQUARE_WIDTH + 1) {
+    for (i in 0 until CANVAS_WIDTH_IN_SQUARES + 1) {
       drawLine(0, i * SQUARE_WIDTH, canvasWidth, i * SQUARE_WIDTH, Colors.GUIDE, 1)
     }
 
-    for (i in 0 until canvasWidth / SQUARE_WIDTH + 1) {
+    for (i in 0 until CANVAS_HEIGHT_IN_SQUARES + 1) {
       drawLine(i * SQUARE_WIDTH, 0, i * SQUARE_WIDTH, canvasHeight, Colors.GUIDE, 1)
     }
   }

@@ -10,9 +10,7 @@ class Commander {
   )
 
   val opponent = Shape(
-    listOf(
-      listOf(0, 0), listOf(0, 1), listOf(1, 0), listOf(1, 1)
-    ), 8, 8, Color.ORANGE
+    emptyList(), 0, 0, Color.ORANGE
   )
 
   private fun mayMove(rowDirection: Int, columnDirection: Int): Boolean {
