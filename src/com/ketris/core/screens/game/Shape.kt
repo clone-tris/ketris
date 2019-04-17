@@ -37,7 +37,7 @@ class Shape(var grid: List<Square>, var row: Int, var column: Int, var color: Co
     width = maxColumn - minColumn + 1
   }
 
-  fun absoluteGrid(): List<Square> {
-    return grid.map { Square(it.row + row, it.column + column) }
+  fun absoluteGrid(translateRow: Int = 0, translateColumn: Int = 0): List<Square> {
+    return grid.map { Square(it.row + row + translateRow, it.column + column + translateColumn) }
   }
 }

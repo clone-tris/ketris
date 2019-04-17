@@ -1,5 +1,6 @@
 package com.ketris.core.screens.game
 
+import com.ketris.core.Config.PUZZLE_HEIGHT
 import com.ketris.core.Config.PUZZLE_WIDTH
 
 class Commander {
@@ -20,12 +21,12 @@ class Commander {
       return false
     }
 
-    val futurePlayer = player.grid.map {
-      Square(
-        it.row + player.row + rowDirection, it.column + player.column + columnDirection
-      )
+    // bottom bound
+    if (columnDirection == 0 && PUZZLE_HEIGHT - player.height == player.row) {
+      return false
     }
 
+    val futurePlayer = player.absoluteGrid(rowDirection, columnDirection)
     val opponentMatrix = opponent.absoluteGrid()
 
     val collides =
