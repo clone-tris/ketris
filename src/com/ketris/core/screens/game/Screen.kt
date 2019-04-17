@@ -1,8 +1,6 @@
 package com.ketris.core.screens.game
 
 import com.ketris.core.framework.events.*
-import com.ketris.core.screens.game.Colors.DEFAULT_SQUARE_COLOR
-import java.awt.Color
 import java.awt.event.KeyEvent
 
 class Screen : IScreen {
@@ -11,7 +9,7 @@ class Screen : IScreen {
   private val commander = Commander()
 
   override fun update(dt: Int) {
-//    applyGravity()
+    applyGravity()
   }
 
   fun applyGravity() {
