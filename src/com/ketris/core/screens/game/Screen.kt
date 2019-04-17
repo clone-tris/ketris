@@ -8,18 +8,7 @@ import java.awt.event.KeyEvent
 class Screen : IScreen {
   private var nextFall = 0L
   private var fallRate = 1000L
-
-  private val player = Shape(
-    arrayOf(
-      intArrayOf(0, 0), intArrayOf(0, 1), intArrayOf(0, 2), intArrayOf(1, 1)
-    ), 0, 0, DEFAULT_SQUARE_COLOR
-  )
-
-  private val opponent = Shape(
-    arrayOf(
-      intArrayOf(0, 0), intArrayOf(0, 1), intArrayOf(1, 0), intArrayOf(1, 1)
-    ), 8, 8, Color.ORANGE
-  )
+  private val commander = Commander()
 
   override fun update(dt: Int) {
 //    applyGravity()
@@ -29,16 +18,16 @@ class Screen : IScreen {
     val time = System.currentTimeMillis()
     if (time >= nextFall) {
       nextFall = time + fallRate
-      player.fallDown()
+      commander.fallDown()
     }
   }
 
   fun keyPressed(e: KeyEvent?) {
     when (e?.keyCode) {
-      KeyEvent.VK_W -> player.defyGravity()
-      KeyEvent.VK_S -> player.fallDown()
-      KeyEvent.VK_A -> player.moveLeft()
-      KeyEvent.VK_D -> player.moveRight()
+      KeyEvent.VK_W -> commander.defyGravity()
+      KeyEvent.VK_S -> commander.fallDown()
+      KeyEvent.VK_A -> commander.moveLeft()
+      KeyEvent.VK_D -> commander.moveRight()
     }
   }
 
@@ -52,10 +41,16 @@ class Screen : IScreen {
 
   private fun paintDebugSection(p: Painter) {
     paintFPS(p)
+    paintPlayerInfo(p)
   }
 
   private fun paintFPS(p: Painter) {
-    p.drawText(text = p.fps.value().toString(), x = 10, y = 10)
+    val fps = p.fps.value().toString()
+    p.drawText(text = "FPS : $fps", x = 10, y = 10)
+  }
+
+  private fun paintPlayerInfo(p: Painter) {
+    p.drawText(text = "r/c ${commander.player.row}, ${commander.player.column}", x = 10, y = 25)
   }
 
   private fun paintBackground(p: Painter) {
@@ -63,7 +58,7 @@ class Screen : IScreen {
   }
 
   private fun paintPlayer(p: Painter) {
-    p.drawShape(player)
-    p.drawShape(opponent)
+    p.drawShape(commander.player)
+    p.drawShape(commander.opponent)
   }
 }
