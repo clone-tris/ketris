@@ -3,19 +3,38 @@ package com.ketris.core.screens.game
 import java.awt.Color
 
 class Shape(var grid: Array<IntArray>, var row: Int, var column: Int, var color: Color) {
+  fun move(rowDirection: Int, columnDirection: Int) {
+    if (!mayMove(rowDirection, columnDirection)) {
+      return
+    }
+
+    if (rowDirection != 0) {
+      row += rowDirection
+    }
+
+    if (columnDirection != 0) {
+      column += columnDirection
+    }
+
+  }
+
+  private fun mayMove(rowDirection: Int, columnDirection: Int): Boolean {
+    return true
+  }
+
   fun moveRight() {
-    column++
+    move(0, +1)
   }
 
   fun moveLeft() {
-    column--
+    move(0, -1)
   }
 
   fun fallDown() {
-    row++
+    move(+1, 0)
   }
 
-  fun rotate() {
-
+  fun defyGravity() {
+    move(-1, 0)
   }
 }

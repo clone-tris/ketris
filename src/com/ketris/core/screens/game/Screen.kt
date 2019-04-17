@@ -2,6 +2,7 @@ package com.ketris.core.screens.game
 
 import com.ketris.core.framework.events.*
 import com.ketris.core.screens.game.Colors.DEFAULT_SQUARE_COLOR
+import java.awt.Color
 import java.awt.event.KeyEvent
 
 class Screen : IScreen {
@@ -14,7 +15,17 @@ class Screen : IScreen {
     ), 0, 0, DEFAULT_SQUARE_COLOR
   )
 
+  private val opponent = Shape(
+    arrayOf(
+      intArrayOf(0, 0), intArrayOf(0, 1), intArrayOf(1, 0), intArrayOf(1, 1)
+    ), 8, 8, Color.ORANGE
+  )
+
   override fun update(dt: Int) {
+//    applyGravity()
+  }
+
+  fun applyGravity() {
     val time = System.currentTimeMillis()
     if (time >= nextFall) {
       nextFall = time + fallRate
@@ -24,7 +35,7 @@ class Screen : IScreen {
 
   fun keyPressed(e: KeyEvent?) {
     when (e?.keyCode) {
-      KeyEvent.VK_W -> player.rotate()
+      KeyEvent.VK_W -> player.defyGravity()
       KeyEvent.VK_S -> player.fallDown()
       KeyEvent.VK_A -> player.moveLeft()
       KeyEvent.VK_D -> player.moveRight()
@@ -53,5 +64,6 @@ class Screen : IScreen {
 
   private fun paintPlayer(p: Painter) {
     p.drawShape(player)
+    p.drawShape(opponent)
   }
 }
