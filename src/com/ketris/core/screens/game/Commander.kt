@@ -26,11 +26,7 @@ class Commander {
       )
     }
 
-    val opponentMatrix = opponent.grid.map {
-      Square(
-        it.row + opponent.row, it.column + opponent.column
-      )
-    }
+    val opponentMatrix = opponent.absoluteGrid()
 
     val collides =
       futurePlayer.any { cell -> opponentMatrix.any { opponentCell -> opponentCell.coordinates() == cell.coordinates() } }
