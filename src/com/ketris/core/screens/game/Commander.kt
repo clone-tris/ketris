@@ -1,17 +1,25 @@
 package com.ketris.core.screens.game
 
-import java.awt.Color
+import com.ketris.core.Config.PUZZLE_WIDTH
 
 class Commander {
   val player = Shape(
-    listOf(
-      Square(0, 0), Square(0, 1), Square(0, 2), Square(1, 1)
-    ), 0, 0, Color.RED
+    listOf(Square(0, 0), Square(0, 1), Square(0, 2), Square(1, 1)), 0, 0
   )
 
   val opponent = Shape(emptyList(), 0, 0)
 
   private fun mayMove(rowDirection: Int, columnDirection: Int): Boolean {
+    // left bound
+    if (columnDirection == -1 && player.column == 0) {
+      return false
+    }
+
+    // right bound
+    if (columnDirection == 1 && PUZZLE_WIDTH - player.width == player.column) {
+      return false
+    }
+
     val futurePlayer = player.grid.map {
       Square(
         it.row + player.row + rowDirection, it.column + player.column + columnDirection
