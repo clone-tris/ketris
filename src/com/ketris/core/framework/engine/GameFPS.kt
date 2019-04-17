@@ -1,4 +1,4 @@
-package com.ketris.core.framework
+package com.ketris.core.framework.engine
 
 import java.util.Timer
 import java.util.TimerTask
@@ -28,7 +28,7 @@ class GameFPS {
     accumulator = 0
   }
 
-  fun value() : Int {
+  fun value(): Int {
     return fps
   }
 

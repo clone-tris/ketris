@@ -1,29 +1,33 @@
 package com.ketris.core.screens.game
 
-import com.ketris.core.framework.*
-import com.ketris.core.screens.game.Constants.SQUARE_WIDTH
+import com.ketris.core.framework.events.*
+import com.ketris.core.screens.game.Colors.DEFAULT_SQUARE_COLOR
+import java.awt.event.KeyEvent
 
 class Screen : IScreen {
-  private val player = Player(100f, 100f, 30f, 30f)
+  private var nextFall = 0L
+  private var fallRate = 1000L
+
+  private val player = Shape(
+    arrayOf(
+      intArrayOf(0, 0), intArrayOf(0, 1), intArrayOf(0, 2), intArrayOf(1, 1)
+    ), 0, 0, DEFAULT_SQUARE_COLOR
+  )
 
   override fun update(dt: Int) {
-    // move 400 pixels per second
-    val translate = 400 * dt / 1000f
-    // todo : try both thrad and if
-
-    if (wIsDown) {
-      player.y -= translate
+    val time = System.currentTimeMillis()
+    if (time >= nextFall) {
+      nextFall = time + fallRate
+      player.fallDown()
     }
-    if (sIsDown) {
-      player.y += translate
-    }
+  }
 
-    if (aIsDown) {
-      player.x -= translate
-    }
-
-    if (dIsDown) {
-      player.x += translate
+  fun keyPressed(e: KeyEvent?) {
+    when (e?.keyCode) {
+      KeyEvent.VK_W -> player.rotate()
+      KeyEvent.VK_S -> player.fallDown()
+      KeyEvent.VK_A -> player.moveLeft()
+      KeyEvent.VK_D -> player.moveRight()
     }
   }
 
@@ -48,6 +52,6 @@ class Screen : IScreen {
   }
 
   private fun paintPlayer(p: Painter) {
-    p.drawSquareAt((player.y / SQUARE_WIDTH).toInt(), (player.x / SQUARE_WIDTH).toInt())
+    p.drawShape(player)
   }
 }

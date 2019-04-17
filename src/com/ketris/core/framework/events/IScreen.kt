@@ -1,4 +1,4 @@
-package com.ketris.core.framework
+package com.ketris.core.framework.events
 
 import com.ketris.core.screens.game.Painter
 

@@ -1,6 +1,6 @@
 package com.ketris.core
 
-import com.ketris.core.framework.GamePanel
+import com.ketris.core.framework.events.GamePanel
 import java.awt.Point
 import javax.swing.JFrame
 import javax.swing.JPanel

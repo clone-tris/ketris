@@ -1,8 +1,7 @@
 package com.ketris.core.screens.game
 
 import com.ketris.core.Config
-import com.ketris.core.framework.GameFPS
-import com.ketris.core.screens.game.Colors.DEFAULT_SQUARE_BACKGROUND
+import com.ketris.core.framework.engine.GameFPS
 import com.ketris.core.screens.game.Constants.SQUARE_BORDER_WIDTH
 import com.ketris.core.screens.game.Constants.SQUARE_WIDTH
 import java.awt.BasicStroke
@@ -25,11 +24,19 @@ class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS) {
     g.drawString(text, x, y + fontSize)
   }
 
-  fun drawSquareAt(row: Int, column: Int, background: Color = DEFAULT_SQUARE_BACKGROUND) {
-    val border: Color = background.darker()
+  fun drawShape(shape: Shape) {
+    shape.grid.forEach { coordinate ->
+      drawSquareAt(
+        shape.row + coordinate[0], shape.column + coordinate[1], shape.color
+      )
+    }
+  }
+
+  fun drawSquareAt(row: Int, column: Int, color: Color) {
+    val border: Color = color.darker()
 
     drawSquare(
-      column * SQUARE_WIDTH, row * SQUARE_WIDTH, SQUARE_WIDTH, SQUARE_WIDTH, background, border
+      column * SQUARE_WIDTH, row * SQUARE_WIDTH, SQUARE_WIDTH, SQUARE_WIDTH, color, border
     )
   }
 

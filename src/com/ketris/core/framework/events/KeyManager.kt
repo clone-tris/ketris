@@ -1,5 +1,6 @@
-package com.ketris.core.framework
+package com.ketris.core.framework.events
 
+import com.ketris.core.screens.game.Screen
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 
@@ -8,8 +9,9 @@ var sIsDown: Boolean = false
 var aIsDown: Boolean = false
 var dIsDown: Boolean = false
 
-class KeyManager : KeyAdapter() {
+class KeyManager(var screen: Screen) : KeyAdapter() {
   override fun keyPressed(e: KeyEvent?) {
+    screen.keyPressed(e)
     when (e?.keyCode) {
       KeyEvent.VK_W -> wIsDown = true
       KeyEvent.VK_S -> sIsDown = true

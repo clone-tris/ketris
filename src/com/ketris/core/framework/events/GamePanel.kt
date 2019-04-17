@@ -1,5 +1,6 @@
-package com.ketris.core.framework
+package com.ketris.core.framework.events
 
+import com.ketris.core.framework.engine.GameFPS
 import com.ketris.core.screens.game.Painter
 import com.ketris.core.screens.game.Screen
 import java.awt.Color
@@ -22,12 +23,13 @@ class GamePanel(width: Int, height: Int) : JPanel() {
   private val screen = Screen()
   private var dt: Int = 0
   private var fps = GameFPS()
+  private var keyManager = KeyManager(screen)
 
   init {
     preferredSize = Dimension(width, height)
     isFocusable = true
     background = Color.decode("#333333")
-    addKeyListener(KeyManager())
+    addKeyListener(keyManager)
   }
 
   fun start() {
