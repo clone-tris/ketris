@@ -1,9 +1,9 @@
 package com.ketris.core.framework.events
 
 import com.ketris.core.framework.engine.GameFPS
+import com.ketris.core.screens.game.UIColors.BACKGROUND
 import com.ketris.core.screens.game.Painter
 import com.ketris.core.screens.game.Screen
-import java.awt.Color
 import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.Graphics2D
@@ -28,7 +28,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
   init {
     preferredSize = Dimension(width, height)
     isFocusable = true
-    background = Color.decode("#333333")
+    background = BACKGROUND
     addKeyListener(keyManager)
   }
 

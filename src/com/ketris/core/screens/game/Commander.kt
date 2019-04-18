@@ -2,10 +2,10 @@ package com.ketris.core.screens.game
 
 import com.ketris.core.Config.PUZZLE_HEIGHT
 import com.ketris.core.Config.PUZZLE_WIDTH
-import com.ketris.core.screens.game.Shapes.Square as SquareShape
+import java.awt.Color
 
 class Commander {
-  val player = Shape(randomShapeGrid(), 0, 0)
+  var player = spawnPlayer()
   val opponent = Shape(
     grid = emptyList(),
     row = 0,
@@ -17,15 +17,20 @@ class Commander {
 
   fun eatPlayer() {
     opponent.grid = opponent.grid.union(player.absoluteGrid()).toList()
-    player.column = 0
-    player.row = 0
-    player.grid = randomShapeGrid()
-    player.computeSize()
+    player = spawnPlayer()
+  }
+
+  fun spawnPlayer(): Shape {
+    return Shape(grid = randomShapeGrid(), row = 0, column = 0, color = randomShapeColor())
   }
 
   fun randomShapeGrid(): List<Square> {
     Math.random()
-    return Shapes.values().toList().shuffled().take(1)[0].grid
+    return Shapes.values().toList().shuffled().first().grid
+  }
+
+  fun randomShapeColor(): Color {
+    return ShapeColors.values().toList().shuffled().first().color
   }
 
   private fun mayMove(rowDirection: Int, columnDirection: Int): Boolean {
@@ -49,7 +54,7 @@ class Commander {
 
     val collides = futurePlayer.any { cell ->
       opponentMatrix.any { opponentCell ->
-        opponentCell.coordinates() == cell.coordinates()
+        listOf(opponentCell.row, opponentCell.column) == listOf(cell.row, cell.column)
       }
     }
 

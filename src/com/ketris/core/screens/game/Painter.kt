@@ -81,11 +81,11 @@ class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS) {
     val canvasWidth = Config.CANVAS_WIDTH
 
     for (i in 0 until PUZZLE_HEIGHT + 1) {
-      drawLine(0, i * SQUARE_WIDTH, canvasWidth, i * SQUARE_WIDTH, Colors.GUIDE, 1)
+      drawLine(0, i * SQUARE_WIDTH, canvasWidth, i * SQUARE_WIDTH, UIColors.GUIDE, 1)
     }
 
     for (i in 0 until PUZZLE_WIDTH + 1) {
-      drawLine(i * SQUARE_WIDTH, 0, i * SQUARE_WIDTH, canvasHeight, Colors.GUIDE, 1)
+      drawLine(i * SQUARE_WIDTH, 0, i * SQUARE_WIDTH, canvasHeight, UIColors.GUIDE, 1)
     }
   }
 }

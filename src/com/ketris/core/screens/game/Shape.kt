@@ -8,7 +8,7 @@ class Shape(
   var grid: List<Square>,
   var row: Int,
   var column: Int,
-  var color: Color? = null,
+  val color: Color? = null,
   var width: Int = 0,
   var height: Int = 0,
   var computeHeight: Boolean = true
@@ -16,6 +16,9 @@ class Shape(
   init {
     if (computeHeight) {
       computeSize()
+    }
+    if (color != null) {
+      grid.forEach { square -> square.color = color }
     }
   }
 
@@ -45,6 +48,8 @@ class Shape(
   }
 
   fun absoluteGrid(translateRow: Int = 0, translateColumn: Int = 0): List<Square> {
-    return grid.map { Square(it.row + row + translateRow, it.column + column + translateColumn) }
+    return grid.map {
+      it.copy(row = it.row + row + translateRow, column = it.column + column + translateColumn)
+    }
   }
 }
