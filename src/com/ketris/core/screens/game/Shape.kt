@@ -4,12 +4,19 @@ import com.ketris.core.Config.PUZZLE_HEIGHT
 import com.ketris.core.Config.PUZZLE_WIDTH
 import java.awt.Color
 
-class Shape(var grid: List<Square>, var row: Int, var column: Int, var color: Color? = null) {
-  var height: Int = 0
-  var width: Int = 0
-
+class Shape(
+  var grid: List<Square>,
+  var row: Int,
+  var column: Int,
+  var color: Color? = null,
+  var width: Int = 0,
+  var height: Int = 0,
+  var computeHeight: Boolean = true
+) {
   init {
-    computeSize()
+    if (computeHeight) {
+      computeSize()
+    }
   }
 
   fun computeSize() {

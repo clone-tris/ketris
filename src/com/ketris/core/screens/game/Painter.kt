@@ -32,6 +32,14 @@ class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS) {
         shape.row + square.row, shape.column + square.column, shape.color ?: square.color
       )
     }
+
+    g.color = Color.BLUE
+    g.drawRect(
+      shape.column * SQUARE_WIDTH,
+      shape.row * SQUARE_WIDTH,
+      shape.width * SQUARE_WIDTH,
+      shape.height * SQUARE_WIDTH
+    )
   }
 
   fun drawSquareAt(row: Int, column: Int, color: Color) {
