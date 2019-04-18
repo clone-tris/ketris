@@ -52,13 +52,15 @@ class Commander {
     val futurePlayer = player.absoluteGrid(rowDirection, columnDirection)
     val opponentMatrix = opponent.absoluteGrid()
 
-    val collides = futurePlayer.any { cell ->
-      opponentMatrix.any { opponentCell ->
-        listOf(opponentCell.row, opponentCell.column) == listOf(cell.row, cell.column)
+    return !shapesCollide(futurePlayer, opponentMatrix)
+  }
+
+  fun shapesCollide(a: List<Square>, b: List<Square>): Boolean {
+    return a.any { cellA ->
+      b.any { cellB ->
+        listOf(cellB.row, cellB.column) == listOf(cellA.row, cellA.column)
       }
     }
-
-    return !collides
   }
 
   fun moveRight() {
