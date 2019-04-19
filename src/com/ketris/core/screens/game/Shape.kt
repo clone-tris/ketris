@@ -64,4 +64,33 @@ class Shape(
       computeHeight = computeHeight
     )
   }
+
+  fun collidesWith(b: Shape): Boolean {
+    return absoluteGrid().any { cellA ->
+      b.absoluteGrid().any { cellB ->
+        listOf(cellB.row, cellB.column) == listOf(cellA.row, cellA.column)
+      }
+    }
+  }
+
+  fun withinBounds(): Boolean {
+    val absoluteMatrix = absoluteGrid()
+
+    val afterRight = absoluteMatrix.any { square -> square.column >= PUZZLE_WIDTH }
+    if (afterRight) {
+      return false
+    }
+
+    val bellowBottom = absoluteMatrix.any { square -> square.row >= PUZZLE_HEIGHT }
+    if (bellowBottom) {
+      return false
+    }
+
+    val beforeLeft = absoluteMatrix.any { square -> square.column < 0 }
+    if (beforeLeft) {
+      return false
+    }
+
+    return true
+  }
 }

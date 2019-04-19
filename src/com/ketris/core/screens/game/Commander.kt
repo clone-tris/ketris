@@ -34,35 +34,35 @@ class Commander {
     return ShapeColors.values().toList().shuffled().first().color
   }
 
-  private fun mayMove(rowDirection: Int, columnDirection: Int): Boolean {
-    // left bound
-    if (columnDirection == -1 && player.column == 0) {
-      return false
+  fun rotate() {
+    val futurePlayer = player.copy()
+    futurePlayer.grid =
+      futurePlayer.grid.map { it.copy(row = it.column, column = player.height - it.row - 1) }
+
+    if (futurePlayer.collidesWith(opponent) || !futurePlayer.withinBounds()) {
+      return
     }
 
-    // right bound
-    if (columnDirection == 1 && PUZZLE_WIDTH - player.width == player.column) {
-      return false
-    }
-
-    // bottom bound
-    if (columnDirection == 0 && PUZZLE_HEIGHT - player.height == player.row) {
-      return false
-    }
-
-    val futurePlayerGrid = player.absoluteGrid(rowDirection, columnDirection)
-    val opponentGrid = opponent.absoluteGrid()
-
-    return !shapesCollide(futurePlayerGrid, opponentGrid)
+    player.grid = futurePlayer.grid
+    player.computeSize()
   }
 
+  private fun move(rowDirection: Int, columnDirection: Int) {
+    val futurePlayer = player.copy()
+    futurePlayer.row += rowDirection
+    futurePlayer.column += columnDirection
 
-  private fun shapesCollide(a: List<Square>, b: List<Square>): Boolean {
-    return a.any { cellA ->
-      b.any { cellB ->
-        listOf(cellB.row, cellB.column) == listOf(cellA.row, cellA.column)
+    val cantMove = futurePlayer.collidesWith(opponent) || !futurePlayer.withinBounds()
+
+    if (cantMove) {
+      if (rowDirection == +1) {
+        eatPlayer()
       }
+      return
     }
+
+    player.row = futurePlayer.row
+    player.column = futurePlayer.column
   }
 
   fun moveRight() {
@@ -77,51 +77,4 @@ class Commander {
     move(+1, 0)
   }
 
-  private fun validRotationGrid(playerGrid: List<Square>): Boolean {
-    if (shapesCollide(playerGrid, opponent.grid)) {
-      return false
-    }
-
-    val afterRight = playerGrid.any { square -> square.column >= PUZZLE_WIDTH }
-    if (afterRight) {
-      return false
-    }
-
-    val bellowBottom = playerGrid.any { square -> square.row >= PUZZLE_HEIGHT }
-    if (bellowBottom) {
-      return false
-    }
-
-    val beforeLeft = playerGrid.any { square -> square.column < 0 }
-    if (beforeLeft) {
-      return false
-    }
-
-    return true
-  }
-
-  fun rotate() {
-    val futurePlayer = player.copy()
-    futurePlayer.grid =
-      futurePlayer.grid.map { it.copy(row = it.column, column = player.height - it.row - 1) }
-
-    if (!validRotationGrid(futurePlayer.absoluteGrid())) {
-      return
-    }
-
-    player.grid = futurePlayer.grid
-    player.computeSize()
-  }
-
-  private fun move(rowDirection: Int, columnDirection: Int) {
-    if (!mayMove(rowDirection, columnDirection)) {
-      if (rowDirection == +1) {
-        eatPlayer()
-      }
-      return
-    }
-
-    player.row += rowDirection
-    player.column += columnDirection
-  }
 }
