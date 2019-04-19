@@ -21,7 +21,9 @@ class Commander {
   }
 
   private fun spawnPlayer(): Shape {
-    return Shape(grid = randomShapeGrid(), row = 0, column = 0, color = randomShapeColor())
+    val newPlayer = Shape(grid = randomShapeGrid(), row = 0, column = 0, color = randomShapeColor())
+    newPlayer.column = (PUZZLE_WIDTH - newPlayer.width) / 2
+    return newPlayer
   }
 
   private fun randomShapeGrid(): List<Square> {
