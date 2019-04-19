@@ -9,7 +9,9 @@ class Screen : IScreen {
   private val commander = Commander()
 
   override fun update(dt: Int) {
-    applyGravity()
+    if (!commander.ended) {
+      applyGravity()
+    }
   }
 
   fun applyGravity() {
@@ -21,6 +23,7 @@ class Screen : IScreen {
   }
 
   fun keyPressed(e: KeyEvent?) {
+
     when (e?.keyCode) {
       KeyEvent.VK_W -> commander.rotate()
       KeyEvent.VK_S -> commander.fallDown()

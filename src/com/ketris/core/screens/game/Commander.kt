@@ -15,9 +15,21 @@ class Commander {
     computeHeight = false
   )
 
+  var ended = false
+
+  fun gameOver() {
+    println("Game Over !")
+    ended = true
+  }
+
   private fun eatPlayer() {
     opponent.grid = opponent.grid.union(player.absoluteGrid()).toList()
-    player = spawnPlayer()
+    val newPlayer = spawnPlayer()
+    if (newPlayer.collidesWith(opponent)) {
+      gameOver()
+      return
+    }
+    player = newPlayer
   }
 
   private fun spawnPlayer(): Shape {
