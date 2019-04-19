@@ -52,4 +52,16 @@ class Shape(
       it.copy(row = it.row + row + translateRow, column = it.column + column + translateColumn)
     }
   }
+
+  fun copy(): Shape {
+    return Shape(
+      grid = grid.map { it.copy() },
+      row = row,
+      column = column,
+      color = color,
+      width = width,
+      height = height,
+      computeHeight = computeHeight
+    )
+  }
 }
