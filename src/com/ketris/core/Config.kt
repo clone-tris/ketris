@@ -7,4 +7,7 @@ object Config {
   const val PUZZLE_HEIGHT = 20
   const val CANVAS_WIDTH: Int = PUZZLE_WIDTH * SQUARE_WIDTH
   const val CANVAS_HEIGHT: Int = PUZZLE_HEIGHT * SQUARE_WIDTH
+
+  // META
+  const val DEBUG_GRAPHICS = false
 }

@@ -11,7 +11,7 @@ import java.awt.Color
 import java.awt.Font
 import java.awt.Graphics2D
 
-class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS) {
+class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS, var debug: Boolean) {
   private fun drawLine(x1: Int, y1: Int, x2: Int, y2: Int, color: Color, strokeWidth: Int) {
     g.stroke = BasicStroke(strokeWidth.toFloat())
     g.color = color
@@ -33,13 +33,15 @@ class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS) {
       )
     }
 
-    g.color = Color.BLUE
-    g.drawRect(
-      shape.column * SQUARE_WIDTH,
-      shape.row * SQUARE_WIDTH,
-      shape.width * SQUARE_WIDTH,
-      shape.height * SQUARE_WIDTH
-    )
+    if (debug) {
+      g.color = Color.BLUE
+      g.drawRect(
+        shape.column * SQUARE_WIDTH,
+        shape.row * SQUARE_WIDTH,
+        shape.width * SQUARE_WIDTH,
+        shape.height * SQUARE_WIDTH
+      )
+    }
   }
 
   fun drawSquareAt(row: Int, column: Int, color: Color) {

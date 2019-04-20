@@ -14,7 +14,7 @@ class Screen : IScreen {
     }
   }
 
-  fun applyGravity() {
+  private fun applyGravity() {
     val time = System.currentTimeMillis()
     if (time >= nextFall) {
       nextFall = time + fallRate
@@ -23,21 +23,28 @@ class Screen : IScreen {
   }
 
   fun keyPressed(e: KeyEvent?) {
+    if (!commander.ended) {
+      when (e?.keyCode) {
+        KeyEvent.VK_W -> commander.rotate()
+        KeyEvent.VK_S -> commander.fallDown()
+        KeyEvent.VK_A -> commander.moveLeft()
+        KeyEvent.VK_D -> commander.moveRight()
+      }
+    } else {
 
-    when (e?.keyCode) {
-      KeyEvent.VK_W -> commander.rotate()
-      KeyEvent.VK_S -> commander.fallDown()
-      KeyEvent.VK_A -> commander.moveLeft()
-      KeyEvent.VK_D -> commander.moveRight()
     }
   }
 
   override fun paint(p: Painter) {
     paintBackground(p)
-    paintPlayer(p)
+    paintShapes(p)
 
     // keep the following last as it need to be on top of everything
-    paintDebugSection(p)
+
+    @Suppress("ConstantConditionIf")//
+    if (p.debug) {
+      paintDebugSection(p)
+    }
   }
 
   private fun paintDebugSection(p: Painter) {
@@ -58,7 +65,7 @@ class Screen : IScreen {
     p.drawGuide()
   }
 
-  private fun paintPlayer(p: Painter) {
+  private fun paintShapes(p: Painter) {
     p.drawShape(commander.player)
     p.drawShape(commander.opponent)
   }
