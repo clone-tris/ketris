@@ -48,21 +48,16 @@ class Commander {
 
   fun rotate() {
     val futurePlayer = player.copy()
-    futurePlayer.grid =
-      futurePlayer.grid.map { it.copy(row = it.column, column = player.height - it.row - 1) }
-
+    futurePlayer.rotate()
     if (futurePlayer.collidesWith(opponent) || !futurePlayer.withinBounds()) {
       return
     }
-
-    player.grid = futurePlayer.grid
-    player.computeSize()
+    player = futurePlayer
   }
 
   private fun move(rowDirection: Int, columnDirection: Int) {
     val futurePlayer = player.copy()
-    futurePlayer.row += rowDirection
-    futurePlayer.column += columnDirection
+    futurePlayer.move(rowDirection, columnDirection)
 
     val cantMove = futurePlayer.collidesWith(opponent) || !futurePlayer.withinBounds()
 
@@ -73,8 +68,7 @@ class Commander {
       return
     }
 
-    player.row = futurePlayer.row
-    player.column = futurePlayer.column
+    player = futurePlayer
   }
 
   fun moveRight() {

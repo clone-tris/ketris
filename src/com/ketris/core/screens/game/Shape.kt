@@ -93,4 +93,14 @@ class Shape(
 
     return true
   }
+
+  fun rotate() {
+    grid = grid.map { it.copy(row = it.column, column = height - it.row - 1) }
+    computeSize()
+  }
+
+  fun move(rowDirection: Int, columnDirection: Int) {
+    row += rowDirection
+    column += columnDirection
+  }
 }
