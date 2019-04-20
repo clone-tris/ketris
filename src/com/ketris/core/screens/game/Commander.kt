@@ -46,7 +46,7 @@ class Commander {
     return ShapeColors.values().toList().shuffled().first().color
   }
 
-  fun rotate() {
+  fun rotatePlayer() {
     val futurePlayer = player.copy()
     futurePlayer.rotate()
     if (futurePlayer.collidesWith(opponent) || !futurePlayer.withinBounds()) {
@@ -55,7 +55,7 @@ class Commander {
     player = futurePlayer
   }
 
-  private fun move(rowDirection: Int, columnDirection: Int) {
+  private fun movePlayer(rowDirection: Int, columnDirection: Int) {
     val futurePlayer = player.copy()
     futurePlayer.move(rowDirection, columnDirection)
 
@@ -72,15 +72,15 @@ class Commander {
   }
 
   fun moveRight() {
-    move(0, +1)
+    movePlayer(0, +1)
   }
 
   fun moveLeft() {
-    move(0, -1)
+    movePlayer(0, -1)
   }
 
   fun fallDown() {
-    move(+1, 0)
+    movePlayer(+1, 0)
   }
 
 }

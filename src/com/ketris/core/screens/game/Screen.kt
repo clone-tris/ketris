@@ -25,7 +25,7 @@ class Screen : IScreen {
   fun keyPressed(e: KeyEvent?) {
     if (!commander.ended) {
       when (e?.keyCode) {
-        KeyEvent.VK_W -> commander.rotate()
+        KeyEvent.VK_W -> commander.rotatePlayer()
         KeyEvent.VK_S -> commander.fallDown()
         KeyEvent.VK_A -> commander.moveLeft()
         KeyEvent.VK_D -> commander.moveRight()
