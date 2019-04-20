@@ -17,7 +17,7 @@ class Commander {
 
   var ended = false
 
-  fun gameOver() {
+  private fun gameOver() {
     println("Game Over !")
     ended = true
   }
