@@ -15,11 +15,11 @@ class Commander {
     computeHeight = false
   )
 
-  var ended = false
+  var gameEnded = false
 
   private fun gameOver() {
     println("Game Over !")
-    ended = true
+    gameEnded = true
   }
 
   private fun eatPlayer() {
