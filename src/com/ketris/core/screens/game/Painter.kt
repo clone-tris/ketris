@@ -44,19 +44,19 @@ class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS, var debug: Boole
     }
   }
 
-  fun drawSquareAt(row: Int, column: Int, color: Color) {
+  private fun drawSquareAt(row: Int, column: Int, color: Color) {
     val border = color.darker()
 
     drawSquare(
-      column * SQUARE_WIDTH, row * SQUARE_WIDTH, SQUARE_WIDTH, color, border
+      column * SQUARE_WIDTH, row * SQUARE_WIDTH, color, border
     )
   }
 
   private fun drawSquare(
-    x: Int, y: Int, width: Int, backgroundColor: Color, borderColor: Color
+    x: Int, y: Int, backgroundColor: Color, borderColor: Color
   ) {
     g.color = backgroundColor
-    g.fillRect(x, y, width, width)
+    g.fillRect(x, y, SQUARE_WIDTH, SQUARE_WIDTH)
 
     drawLine(x, y, x + SQUARE_WIDTH - 1, y, borderColor, SQUARE_BORDER_WIDTH)
     drawLine(x, y, x, y + SQUARE_WIDTH - 1, borderColor, SQUARE_BORDER_WIDTH)

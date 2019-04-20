@@ -36,6 +36,7 @@ class Screen : IScreen {
         KeyEvent.VK_S -> commander.fallDown()
         KeyEvent.VK_A -> commander.moveLeft()
         KeyEvent.VK_D -> commander.moveRight()
+        KeyEvent.VK_R -> commander.restart()
         KeyEvent.VK_ENTER -> commander.animating = !commander.animating
       }
     } else {

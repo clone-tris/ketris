@@ -25,12 +25,41 @@ class Commander {
 
   private fun eatPlayer() {
     opponent.grid = opponent.grid.union(player.absoluteGrid()).toList()
-    val newPlayer = spawnPlayer()
-    if (newPlayer.collidesWith(opponent)) {
-      gameOver()
+    removeFullLines()
+  }
+
+  fun restart() {
+    opponent.grid = emptyList()
+    player = spawnPlayer()
+  }
+
+  private fun removeFullLines() {
+    val fullRows = opponent.grid.fold(mutableMapOf<Int, Int>()) { acc, square ->
+      val row = square.row
+      val rowCount = acc.getOrPut(row) { 0 }
+      acc[row] = rowCount + 1
+      acc
+    }.filter { it.value == PUZZLE_WIDTH }.keys
+
+    if (fullRows.isEmpty()) {
       return
     }
-    player = newPlayer
+
+
+    val filteredGrid = opponent.grid
+      // remove full lines from grid
+      .filter { (row) -> row !in fullRows }.toList()
+
+    // translate lines above deletes lines, one row down
+    fullRows.sorted().forEach { removedRow ->
+      filteredGrid.forEach { square ->
+        if (square.row < removedRow) {
+          square.row++
+        }
+      }
+    }
+
+    opponent.grid = filteredGrid
   }
 
   private fun spawnPlayer(): Shape {
@@ -66,6 +95,13 @@ class Commander {
     } else {
       if (rowDirection == +1) {
         eatPlayer()
+
+        val newPlayer = spawnPlayer()
+        if (newPlayer.collidesWith(opponent)) {
+          gameOver()
+          return
+        }
+        player = newPlayer
       }
     }
   }
