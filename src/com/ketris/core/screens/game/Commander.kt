@@ -34,6 +34,7 @@ class Commander {
 
   private fun spawnPlayer(): Shape {
     val newPlayer = Shape(grid = randomShapeGrid(), row = 0, column = 0, color = randomShapeColor())
+    newPlayer.row -= newPlayer.height
     newPlayer.column = (PUZZLE_WIDTH - newPlayer.width) / 2
     return newPlayer
   }
@@ -58,17 +59,14 @@ class Commander {
   private fun movePlayer(rowDirection: Int, columnDirection: Int) {
     val futurePlayer = player.copy()
     futurePlayer.move(rowDirection, columnDirection)
-
-    val cantMove = futurePlayer.collidesWith(opponent) || !futurePlayer.withinBounds()
-
-    if (cantMove) {
+    val canMove = !futurePlayer.collidesWith(opponent) && futurePlayer.withinBounds()
+    if (canMove) {
+      player = futurePlayer
+    } else {
       if (rowDirection == +1) {
         eatPlayer()
       }
-      return
     }
-
-    player = futurePlayer
   }
 
   fun moveRight() {
