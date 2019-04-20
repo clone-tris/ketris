@@ -4,18 +4,18 @@ enum class Shapes(val grid: List<Square>) {
   T(
     listOf(
       Square(0, 0), Square(0, 1), Square(0, 2),
-      /*     */Square(1, 1)
+      /*          */Square(1, 1)
     )
   ),
   Z(
     listOf(
       Square(0, 0), Square(0, 1),
-      /*     */Square(1, 1), Square(1, 2)
+      /*          */Square(1, 1), Square(1, 2)
     )
   ),
   S(
     listOf(
-      /*         */Square(0, 1), Square(0, 2),//
+      /*              */Square(0, 1), Square(0, 2),//
       /**/Square(1, 0), Square(1, 1)//
     )
   ),
@@ -39,7 +39,7 @@ enum class Shapes(val grid: List<Square>) {
   ),
   I(
     listOf(
-      Square(0, 0), Square(0, 1), Square(0, 2), Square(1, 1)
+      Square(0, 0), Square(0, 1), Square(0, 2), Square(0, 3)
     )
   )
 }

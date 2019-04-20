@@ -29,7 +29,7 @@ class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS, var debug: Boole
   fun drawShape(shape: Shape) {
     shape.grid.forEach { square ->
       drawSquareAt(
-        shape.row + square.row, shape.column + square.column, shape.color ?: square.color
+        shape.row + square.row, shape.column + square.column, square.color
       )
     }
 

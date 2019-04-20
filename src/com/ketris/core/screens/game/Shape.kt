@@ -2,13 +2,14 @@ package com.ketris.core.screens.game
 
 import com.ketris.core.Config.PUZZLE_HEIGHT
 import com.ketris.core.Config.PUZZLE_WIDTH
+import com.ketris.core.screens.game.UIColors.DEFAULT_SQUARE_COLOR
 import java.awt.Color
 
 class Shape(
   var grid: List<Square>,
   var row: Int,
   var column: Int,
-  val color: Color? = null,
+  val color: Color = DEFAULT_SQUARE_COLOR,
   var width: Int = 0,
   var height: Int = 0,
   var computeHeight: Boolean = true
@@ -17,12 +18,10 @@ class Shape(
     if (computeHeight) {
       computeSize()
     }
-    if (color != null) {
-      grid.forEach { square -> square.color = color }
-    }
+    grid.forEach { square -> square.color = color }
   }
 
-  fun computeSize() {
+  private fun computeSize() {
     var minRow = PUZZLE_HEIGHT
     var maxRow = 0
     var minColumn = PUZZLE_WIDTH
