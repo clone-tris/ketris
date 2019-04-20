@@ -15,6 +15,7 @@ class Commander {
     computeHeight = false
   )
 
+  var animating = false
   var gameEnded = false
 
   private fun gameOver() {

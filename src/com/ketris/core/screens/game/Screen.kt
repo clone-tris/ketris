@@ -4,12 +4,19 @@ import com.ketris.core.framework.events.*
 import java.awt.event.KeyEvent
 
 class Screen : IScreen {
+  private val commander = Commander()
   private var nextFall = 0L
   private var fallRate = 1000L
-  private val commander = Commander()
+  private var wasAnimating = false
 
   override fun update(dt: Int) {
-    if (!commander.gameEnded) {
+    if (commander.animating) {
+      wasAnimating = true
+    } else if (wasAnimating) {
+      nextFall = System.currentTimeMillis() + fallRate
+      wasAnimating = false
+    }
+    if (!commander.gameEnded && !wasAnimating) {
       applyGravity()
     }
   }
@@ -29,6 +36,7 @@ class Screen : IScreen {
         KeyEvent.VK_S -> commander.fallDown()
         KeyEvent.VK_A -> commander.moveLeft()
         KeyEvent.VK_D -> commander.moveRight()
+        KeyEvent.VK_ENTER -> commander.animating = !commander.animating
       }
     } else {
 
