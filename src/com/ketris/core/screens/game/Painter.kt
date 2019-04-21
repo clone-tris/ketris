@@ -50,6 +50,12 @@ class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS, var debug: Boole
     drawSquare(
       column * SQUARE_WIDTH, row * SQUARE_WIDTH, color, border
     )
+
+    if (debug) {
+      val margin = 10 * SQUARE_WIDTH / 100
+      drawText("$row", column * SQUARE_WIDTH + margin, row * SQUARE_WIDTH + margin)
+      drawText("$column", column * SQUARE_WIDTH + margin, row * SQUARE_WIDTH + margin + 12 + margin)
+    }
   }
 
   private fun drawSquare(

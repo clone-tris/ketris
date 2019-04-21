@@ -45,7 +45,6 @@ class Commander {
       return
     }
 
-
     val filteredGrid = opponent.grid
       // remove full lines from grid
       .filter { (row) -> row !in fullRows }.toList()
