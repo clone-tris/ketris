@@ -17,10 +17,10 @@ class Window(title: String) : JFrame(title) {
 
     isVisible = true
     // at home
-//        location = Point(760, 410)
+        location = Point(1000, 110)
 
     // at work
-    location = Point(1200, 410)
+//    location = Point(1200, 410)
     defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
 
     canvas.start()
