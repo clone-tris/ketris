@@ -47,7 +47,7 @@ class Commander {
 
     val filteredGrid = opponent.grid
       // remove full lines from grid
-      .filter { (row) -> row !in fullRows }.toList()
+      .filter { (row) -> row !in fullRows }
 
     // translate lines above deletes lines, one row down
     fullRows.sorted().forEach { removedRow ->
