@@ -36,7 +36,7 @@ class Commander {
   }
 
   private fun removeFullLines() {
-    log("Testing for full lines, after dropping ${player.grid}")
+//    log("Testing for full lines, after dropping ${player.grid}")
 
     val squaresInRows = opponent.grid.fold(mutableMapOf<Int, Int>()) { acc, square ->
       val row = square.row
@@ -45,27 +45,27 @@ class Commander {
       acc
     }
 
-    log("Here is how full rows are : $squaresInRows")
+    if (squaresInRows.any { it.value > PUZZLE_WIDTH }) {
+      println(
+        "something fishy here : rows are full like so $squaresInRows," +
+        " grid is full like so ${opponent.grid}"
+      )
+    }
 
-    val fullRows = opponent.grid.fold(mutableMapOf<Int, Int>()) { acc, square ->
-      val row = square.row
-      val rowCount = acc.getOrPut(row) { 0 }
-      acc[row] = rowCount + 1
-      acc
-    }.filter { it.value == PUZZLE_WIDTH }.keys.sorted()
+    val fullRows = squaresInRows.filter { it.value == PUZZLE_WIDTH }.keys.sorted()
 
     if (fullRows.isEmpty()) {
       return
     }
 
-    log("removing full rows : (Size : ${fullRows.size}) $fullRows")
-    log("Original grid : ${opponent.grid}")
+//    log("removing full rows : (Size : ${fullRows.size}) $fullRows")
+//    log("Original grid : ${opponent.grid}")
 
     val filteredGrid = opponent.grid
       // remove full lines from grid
       .filter { (row) -> row !in fullRows }
 
-    log("remaining rows : $filteredGrid")
+//    log("remaining rows : $filteredGrid")
 
     opponent.grid = filteredGrid.map { square ->
       val copy = square.copy()
@@ -77,7 +77,7 @@ class Commander {
       copy
     }
 
-    log("result ${opponent.grid}")
+//    log("result ${opponent.grid}")
   }
 
 
