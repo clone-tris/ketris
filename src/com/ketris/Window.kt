@@ -1,6 +1,6 @@
-package com.ketris.core
+package com.ketris
 
-import com.ketris.core.framework.events.GamePanel
+import com.ketris.framework.events.GamePanel
 import java.awt.Point
 import javax.swing.JFrame
 import javax.swing.JPanel
@@ -9,7 +9,11 @@ import javax.swing.WindowConstants
 class Window(title: String) : JFrame(title) {
   init {
     val windowPane = JPanel()
-    val canvas = GamePanel(Config.CANVAS_WIDTH, Config.CANVAS_HEIGHT)
+    val canvas =
+      GamePanel(
+        Config.CANVAS_WIDTH,
+        Config.CANVAS_HEIGHT
+      )
     windowPane.add(canvas)
 
     contentPane = windowPane

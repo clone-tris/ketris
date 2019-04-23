@@ -1,4 +1,4 @@
-import com.ketris.core.Config.ENABLE_LOG
+import com.ketris.Config.ENABLE_LOG
 
 fun log(message: String) {
   @Suppress("ConstantConditionIf") if (ENABLE_LOG) {

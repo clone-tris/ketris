@@ -1,4 +1,4 @@
-package com.ketris.core
+package com.ketris
 
 fun main(args: Array<String>) {
   java.awt.EventQueue.invokeLater {

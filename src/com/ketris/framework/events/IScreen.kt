@@ -1,6 +1,6 @@
-package com.ketris.core.framework.events
+package com.ketris.framework.events
 
-import com.ketris.core.screens.game.Painter
+import com.ketris.screens.game.Painter
 
 interface IScreen {
   /**

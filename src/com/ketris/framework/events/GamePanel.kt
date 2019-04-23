@@ -1,10 +1,10 @@
-package com.ketris.core.framework.events
+package com.ketris.framework.events
 
-import com.ketris.core.Config.DEBUG_GRAPHICS
-import com.ketris.core.framework.engine.GameFPS
-import com.ketris.core.screens.game.UIColors.BACKGROUND
-import com.ketris.core.screens.game.Painter
-import com.ketris.core.screens.game.Screen
+import com.ketris.Config.DEBUG_GRAPHICS
+import com.ketris.framework.engine.GameFPS
+import com.ketris.screens.game.UIColors.BACKGROUND
+import com.ketris.screens.game.Painter
+import com.ketris.screens.game.Screen
 import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.Graphics2D
@@ -79,7 +79,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
     rh[RenderingHints.KEY_RENDERING] = RenderingHints.VALUE_RENDER_QUALITY
     g2D.setRenderingHints(rh)
 
-    val p = Painter(g=g2D, dt=dt, fps=fps, debug=DEBUG_GRAPHICS)
+    val p = Painter(g = g2D, dt = dt, fps = fps, debug = DEBUG_GRAPHICS)
     screen.paint(p)
     fps.increment()
 

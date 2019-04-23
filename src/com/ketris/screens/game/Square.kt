@@ -1,6 +1,6 @@
-package com.ketris.core.screens.game
+package com.ketris.screens.game
 
-import com.ketris.core.screens.game.UIColors.DEFAULT_SQUARE_COLOR
+import com.ketris.screens.game.UIColors.DEFAULT_SQUARE_COLOR
 import java.awt.Color
 
 val Color.hex: String

@@ -1,8 +1,8 @@
-package com.ketris.core.screens.game
+package com.ketris.screens.game
 
-import com.ketris.core.Config.PUZZLE_HEIGHT
-import com.ketris.core.Config.PUZZLE_WIDTH
-import com.ketris.core.screens.game.UIColors.DEFAULT_SQUARE_COLOR
+import com.ketris.Config.PUZZLE_HEIGHT
+import com.ketris.Config.PUZZLE_WIDTH
+import com.ketris.screens.game.UIColors.DEFAULT_SQUARE_COLOR
 import java.awt.Color
 
 class Shape(

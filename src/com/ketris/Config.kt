@@ -1,4 +1,4 @@
-package com.ketris.core
+package com.ketris
 
 object Config {
   const val SQUARE_WIDTH = 20

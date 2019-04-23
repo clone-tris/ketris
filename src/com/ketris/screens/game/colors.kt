@@ -1,4 +1,4 @@
-package com.ketris.core.screens.game
+package com.ketris.screens.game
 
 import java.awt.Color
 

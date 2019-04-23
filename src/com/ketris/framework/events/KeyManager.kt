@@ -1,6 +1,6 @@
-package com.ketris.core.framework.events
+package com.ketris.framework.events
 
-import com.ketris.core.screens.game.Screen
+import com.ketris.screens.game.Screen
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 

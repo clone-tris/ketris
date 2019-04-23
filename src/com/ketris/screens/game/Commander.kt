@@ -1,7 +1,7 @@
-package com.ketris.core.screens.game
+package com.ketris.screens.game
 
-import com.ketris.core.Config.PUZZLE_HEIGHT
-import com.ketris.core.Config.PUZZLE_WIDTH
+import com.ketris.Config.PUZZLE_HEIGHT
+import com.ketris.Config.PUZZLE_WIDTH
 import log
 import java.awt.Color
 
@@ -82,7 +82,13 @@ class Commander {
 
 
   private fun spawnPlayer(): Shape {
-    val newPlayer = Shape(grid = randomShapeGrid(), row = 0, column = 0, color = randomShapeColor())
+    val newPlayer =
+      Shape(
+        grid = randomShapeGrid(),
+        row = 0,
+        column = 0,
+        color = randomShapeColor()
+      )
     newPlayer.row -= newPlayer.height
     newPlayer.column = (PUZZLE_WIDTH - newPlayer.width) / 2
     return newPlayer

@@ -1,10 +1,13 @@
-package com.ketris.core.screens.game
+package com.ketris.screens.game
 
 enum class Shapes(val grid: List<Square>) {
   T(
     listOf(
-      Square(0, 0), Square(0, 1), Square(0, 2),
-      /*          */Square(1, 1)
+      Square(0, 0),
+      Square(0, 1),
+      Square(0, 2),
+      /*          */
+      Square(1, 1)
     )
   ),
   Z(
@@ -21,14 +24,18 @@ enum class Shapes(val grid: List<Square>) {
   ),
   L(
     listOf(
-      Square(0, 0), Square(0, 1), Square(0, 2), //
+      Square(0, 0),
+      Square(0, 1),
+      Square(0, 2), //
       Square(1, 0)
     )
   ),
   J(
     listOf(
       Square(0, 0), //
-      Square(1, 0), Square(1, 1), Square(1, 2)
+      Square(1, 0),
+      Square(1, 1),
+      Square(1, 2)
     )
   ),
   O(
@@ -39,7 +46,10 @@ enum class Shapes(val grid: List<Square>) {
   ),
   I(
     listOf(
-      Square(0, 0), Square(0, 1), Square(0, 2), Square(0, 3)
+      Square(0, 0),
+      Square(0, 1),
+      Square(0, 2),
+      Square(0, 3)
     )
   )
 }
