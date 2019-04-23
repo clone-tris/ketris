@@ -10,4 +10,5 @@ object Config {
 
   // META
   const val DEBUG_GRAPHICS = false
+  const val ENABLE_LOG = true
 }

@@ -2,6 +2,7 @@ package com.ketris.core.screens.game
 
 import com.ketris.core.Config.PUZZLE_HEIGHT
 import com.ketris.core.Config.PUZZLE_WIDTH
+import log
 import java.awt.Color
 
 class Commander {
@@ -17,9 +18,10 @@ class Commander {
 
   var animating = false
   var gameEnded = false
+  var inspect = false
 
   private fun gameOver() {
-    println("Game Over !")
+    log("Game Over !")
     gameEnded = true
   }
 
@@ -34,32 +36,50 @@ class Commander {
   }
 
   private fun removeFullLines() {
+    log("Testing for full lines ...")
+
+    val squaresInRows = opponent.grid.fold(mutableMapOf<Int, Int>()) { acc, square ->
+      val row = square.row
+      val rowCount = acc.getOrPut(row) { 0 }
+      acc[row] = rowCount + 1
+      acc
+    }
+
+    log("Here is how full rows are : $squaresInRows")
+
     val fullRows = opponent.grid.fold(mutableMapOf<Int, Int>()) { acc, square ->
       val row = square.row
       val rowCount = acc.getOrPut(row) { 0 }
       acc[row] = rowCount + 1
       acc
-    }.filter { it.value == PUZZLE_WIDTH }.keys
+    }.filter { it.value == PUZZLE_WIDTH }.keys.sorted()
 
     if (fullRows.isEmpty()) {
       return
     }
 
+    log("removing full rows : (Size : ${fullRows.size}) $fullRows")
+    log("Original grid : ${opponent.grid}")
+
     val filteredGrid = opponent.grid
       // remove full lines from grid
       .filter { (row) -> row !in fullRows }
 
-    // translate lines above deletes lines, one row down
-    fullRows.sorted().forEach { removedRow ->
-      filteredGrid.forEach { square ->
-        if (square.row < removedRow) {
-          square.row++
+    log("remaining rows : $filteredGrid")
+
+    opponent.grid = filteredGrid.map { square ->
+      val copy = square.copy()
+      fullRows.forEach { row ->
+        if (row > copy.row) {
+          copy.row++
         }
       }
+      copy
     }
 
-    opponent.grid = filteredGrid
+    log("result ${opponent.grid}")
   }
+
 
   private fun spawnPlayer(): Shape {
     val newPlayer = Shape(grid = randomShapeGrid(), row = 0, column = 0, color = randomShapeColor())
@@ -115,6 +135,9 @@ class Commander {
 
   fun fallDown() {
     movePlayer(+1, 0)
+    if (inspect) {
+      inspect = false
+    }
   }
 
 }

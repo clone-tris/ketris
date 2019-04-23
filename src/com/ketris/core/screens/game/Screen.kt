@@ -37,6 +37,7 @@ class Screen : IScreen {
         KeyEvent.VK_A -> commander.moveLeft()
         KeyEvent.VK_D -> commander.moveRight()
         KeyEvent.VK_R -> commander.restart()
+        KeyEvent.VK_I -> commander.inspect = true
         KeyEvent.VK_ENTER -> commander.animating = !commander.animating
       }
     } else {
