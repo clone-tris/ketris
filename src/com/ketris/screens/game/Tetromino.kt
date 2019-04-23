@@ -1,6 +1,6 @@
 package com.ketris.screens.game
 
-enum class Shapes(val grid: List<Square>) {
+enum class Tetromino(val grid: List<Square>) {
   T(
     listOf(
       Square(0, 0),

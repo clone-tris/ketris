@@ -95,7 +95,7 @@ class Commander {
   }
 
   private fun randomShapeGrid(): List<Square> {
-    return Shapes.values().toList().shuffled().first().grid
+    return Tetromino.values().toList().shuffled().first().grid
   }
 
   private fun randomShapeColor(): Color {

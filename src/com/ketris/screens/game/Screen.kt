@@ -1,6 +1,5 @@
 package com.ketris.screens.game
 
-import com.ketris.core.framework.events.*
 import com.ketris.framework.events.IScreen
 import java.awt.event.KeyEvent
 
