@@ -36,7 +36,7 @@ class Commander {
   }
 
   private fun removeFullLines() {
-    log("Testing for full lines ...")
+    log("Testing for full lines, after dropping ${player.grid}")
 
     val squaresInRows = opponent.grid.fold(mutableMapOf<Int, Int>()) { acc, square ->
       val row = square.row
