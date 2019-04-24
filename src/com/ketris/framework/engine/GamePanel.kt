@@ -1,7 +1,7 @@
-package com.ketris.framework.events
+package com.ketris.framework.engine
 
 import com.ketris.Config.DEBUG_GRAPHICS
-import com.ketris.framework.engine.GameFPS
+import com.ketris.framework.events.KeyManager
 import com.ketris.screens.game.UIColors.BACKGROUND
 import com.ketris.screens.game.Painter
 import com.ketris.screens.game.Screen
@@ -12,7 +12,6 @@ import java.awt.RenderingHints
 import java.awt.Toolkit
 import java.util.concurrent.TimeUnit
 import javax.swing.JPanel
-
 
 const val FRAMES_PER_SECOND = 60
 val REFRESH_INTERVAL_MS: Long = TimeUnit.SECONDS.toMillis(1) / FRAMES_PER_SECOND
@@ -33,7 +32,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
     addKeyListener(keyManager)
   }
 
-  fun start() {
+  fun startGameLoop() {
     val thread = Thread(Runnable { loop() })
     thread.start()
   }
@@ -82,10 +81,6 @@ class GamePanel(width: Int, height: Int) : JPanel() {
     val p = Painter(g = g2D, dt = dt, fps = fps, debug = DEBUG_GRAPHICS)
     screen.paint(p)
     fps.increment()
-
-    // After painting :
-    // - in debug mode Showing some info about current location and frame rates are essential
-    // TODO: add debugging stuff.
 
     Toolkit.getDefaultToolkit().sync()
     g2D.dispose()

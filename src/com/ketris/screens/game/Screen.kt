@@ -1,6 +1,6 @@
 package com.ketris.screens.game
 
-import com.ketris.framework.events.IScreen
+import com.ketris.framework.engine.IScreen
 import java.awt.event.KeyEvent
 
 class Screen : IScreen {
@@ -38,7 +38,7 @@ class Screen : IScreen {
         KeyEvent.VK_D -> commander.moveRight()
         KeyEvent.VK_R -> commander.restart()
         KeyEvent.VK_I -> commander.inspect = true
-        KeyEvent.VK_ENTER -> commander.animating = !commander.animating
+        KeyEvent.VK_P -> commander.animating = !commander.animating
       }
     } else {
 
