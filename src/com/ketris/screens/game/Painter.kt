@@ -47,7 +47,7 @@ class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS, var debug: Boole
   private fun drawSquareAt(row: Int, column: Int, color: Color) {
     val border = color.darker()
 
-    drawSquare(
+    drawTetrominoSquare(
       column * SQUARE_WIDTH, row * SQUARE_WIDTH, color, border
     )
 
@@ -58,7 +58,7 @@ class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS, var debug: Boole
     }
   }
 
-  private fun drawSquare(
+  private fun drawTetrominoSquare(
     x: Int, y: Int, backgroundColor: Color, borderColor: Color
   ) {
     g.color = backgroundColor
