@@ -3,7 +3,6 @@ package com.ketris.framework.engine
 import com.ketris.Config.DEBUG_GRAPHICS
 import com.ketris.framework.events.KeyManager
 import com.ketris.screens.game.UIColors.BACKGROUND
-import com.ketris.screens.game.Painter
 import com.ketris.screens.game.Screen
 import java.awt.Dimension
 import java.awt.Graphics
@@ -19,7 +18,7 @@ val REFRESH_INTERVAL_MS: Long = TimeUnit.SECONDS.toMillis(1) / FRAMES_PER_SECOND
 class GamePanel(width: Int, height: Int) : JPanel() {
   private var timeLastRunMs = System.currentTimeMillis()
   private var isRunning: Boolean = true
-  private val redrawLock = java.lang.Object()
+  private val redrawLock = Object()
   private val screen = Screen()
   private var dt: Int = 0
   private var fps = GameFPS()
@@ -78,8 +77,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
     rh[RenderingHints.KEY_RENDERING] = RenderingHints.VALUE_RENDER_QUALITY
     g2D.setRenderingHints(rh)
 
-    val p = Painter(g = g2D, dt = dt, fps = fps, debug = DEBUG_GRAPHICS)
-    screen.paint(p)
+    screen.paint(screen.painter(g2D, dt, fps, DEBUG_GRAPHICS))
     fps.increment()
 
     Toolkit.getDefaultToolkit().sync()

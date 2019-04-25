@@ -47,8 +47,7 @@ class Commander {
 
     if (squaresInRows.any { it.value > PUZZLE_WIDTH }) {
       println(
-        "something fishy here : rows are full like so $squaresInRows," +
-        " grid is full like so ${opponent.grid}"
+        "something fishy here : rows are full like so $squaresInRows," + " grid is full like so ${opponent.grid}"
       )
     }
 
@@ -82,13 +81,9 @@ class Commander {
 
 
   private fun spawnPlayer(): Shape {
-    val newPlayer =
-      Shape(
-        grid = randomShapeGrid(),
-        row = 0,
-        column = 0,
-        color = randomShapeColor()
-      )
+    val newPlayer = Shape(
+      grid = randomShapeGrid(), row = 0, column = 0, color = randomShapeColor()
+    )
     newPlayer.row -= newPlayer.height
     newPlayer.column = (PUZZLE_WIDTH - newPlayer.width) / 2
     return newPlayer

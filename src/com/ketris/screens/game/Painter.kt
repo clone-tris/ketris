@@ -6,24 +6,32 @@ import com.ketris.Config.PUZZLE_WIDTH
 import com.ketris.framework.engine.GameFPS
 import com.ketris.Config.SQUARE_BORDER_WIDTH
 import com.ketris.Config.SQUARE_WIDTH
+import com.ketris.framework.engine.GraphicsPainter
 import java.awt.BasicStroke
 import java.awt.Color
-import java.awt.Font
 import java.awt.Graphics2D
 
-class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS, var debug: Boolean) {
+class Painter(g: Graphics2D, dt: Int, fps: GameFPS, debug: Boolean) : GraphicsPainter(
+  g, dt, fps, debug
+) {
+
+  fun drawBackground() {
+    drawGuide()
+  }
+
+  fun drawFPS() {
+    val fps = fps.value().toString()
+    drawText(text = "FPS : $fps", x = 10, y = 10)
+  }
+
+  fun drawPlayerInfo(player: Shape) {
+    drawText(text = "r/c ${player.row}, ${player.column}", x = 10, y = 25)
+  }
+
   private fun drawLine(x1: Int, y1: Int, x2: Int, y2: Int, color: Color, strokeWidth: Int) {
     g.stroke = BasicStroke(strokeWidth.toFloat())
     g.color = color
     g.drawLine(x1, y1, x2, y2)
-  }
-
-  fun drawText(
-    text: String, x: Int, y: Int, fontSize: Int = 12, color: Color = Color.decode("#ffffff")
-  ) {
-    g.color = color
-    g.font = Font("Verdana", Font.BOLD, fontSize)
-    g.drawString(text, x, y + fontSize)
   }
 
   fun drawShape(shape: Shape) {
@@ -89,13 +97,15 @@ class Painter(val g: Graphics2D, var dt: Int, var fps: GameFPS, var debug: Boole
     val canvasWidth = Config.CANVAS_WIDTH
 
     for (i in 0 until PUZZLE_HEIGHT + 1) {
-      drawLine(0, i * SQUARE_WIDTH, canvasWidth, i * SQUARE_WIDTH,
-               UIColors.GUIDE, 1)
+      drawLine(
+        0, i * SQUARE_WIDTH, canvasWidth, i * SQUARE_WIDTH, UIColors.GUIDE, 1
+      )
     }
 
     for (i in 0 until PUZZLE_WIDTH + 1) {
-      drawLine(i * SQUARE_WIDTH, 0, i * SQUARE_WIDTH, canvasHeight,
-               UIColors.GUIDE, 1)
+      drawLine(
+        i * SQUARE_WIDTH, 0, i * SQUARE_WIDTH, canvasHeight, UIColors.GUIDE, 1
+      )
     }
   }
 }
