@@ -9,11 +9,17 @@ class Shape(
   var grid: List<Square>,
   var row: Int,
   var column: Int,
-  val color: Color = DEFAULT_SQUARE_COLOR,
+  color: Color = DEFAULT_SQUARE_COLOR,
   var width: Int = 0,
   var height: Int = 0,
   var computeHeight: Boolean = true
 ) {
+  var color: Color = color
+    set(value) {
+      field = value
+      grid.forEach { square -> square.color = color }
+    }
+
   init {
     if (computeHeight) {
       computeSize()
