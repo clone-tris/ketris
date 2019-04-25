@@ -14,6 +14,12 @@ class Window(title: String) : JFrame(title) {
     )
     windowPane.add(canvas)
 
+    // todo : add loading screen
+    // todo : add score
+    // todo : level indicator
+    // todo : removed lines count
+    // todo : next shape preview
+
     contentPane = windowPane
     pack()
 
