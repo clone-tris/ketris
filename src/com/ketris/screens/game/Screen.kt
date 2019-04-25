@@ -9,7 +9,7 @@ class Screen : IScreen {
   private var nextFall = 0L
   private var fallRate = 1000L
   private var wasAnimating = false
-  override val painter = ::Painter
+  override val painterClass = ::Painter
 
   override fun update(dt: Int) {
     if (commander.animating) {
@@ -31,9 +31,9 @@ class Screen : IScreen {
     }
   }
 
-  fun keyPressed(e: KeyEvent?) {
+  override fun keyPressed(e: KeyEvent) {
     if (!commander.gameEnded) {
-      when (e?.keyCode) {
+      when (e.keyCode) {
         KeyEvent.VK_W -> commander.rotatePlayer()
         KeyEvent.VK_S -> commander.fallDown()
         KeyEvent.VK_A -> commander.moveLeft()

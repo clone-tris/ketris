@@ -2,6 +2,7 @@ package com.ketris.framework.engine
 
 import com.ketris.Config.DEBUG_GRAPHICS
 import com.ketris.framework.events.KeyManager
+import com.ketris.framework.events.MouseManager
 import com.ketris.screens.game.UIColors.BACKGROUND
 import com.ketris.screens.game.Screen
 import java.awt.Dimension
@@ -23,12 +24,14 @@ class GamePanel(width: Int, height: Int) : JPanel() {
   private var dt: Int = 0
   private var fps = GameFPS()
   private var keyManager = KeyManager(screen)
+  private var mouseManager = MouseManager(screen)
 
   init {
     preferredSize = Dimension(width, height)
     isFocusable = true
     background = BACKGROUND
     addKeyListener(keyManager)
+    addMouseListener(mouseManager)
   }
 
   fun startGameLoop() {
@@ -77,7 +80,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
     rh[RenderingHints.KEY_RENDERING] = RenderingHints.VALUE_RENDER_QUALITY
     g2D.setRenderingHints(rh)
 
-    screen.paint(screen.painter(g2D, dt, fps, DEBUG_GRAPHICS))
+    screen.paint(screen.painterClass(g2D, dt, fps, DEBUG_GRAPHICS))
     fps.increment()
 
     Toolkit.getDefaultToolkit().sync()

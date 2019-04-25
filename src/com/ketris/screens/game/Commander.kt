@@ -3,7 +3,6 @@ package com.ketris.screens.game
 import com.ketris.Config.PUZZLE_HEIGHT
 import com.ketris.Config.PUZZLE_WIDTH
 import log
-import java.awt.Color
 
 class Commander {
   var player = spawnPlayer()
@@ -86,14 +85,6 @@ class Commander {
     newPlayer.row -= newPlayer.height
     newPlayer.column = (PUZZLE_WIDTH - newPlayer.width) / 2
     return newPlayer
-  }
-
-  private fun randomShapeGrid(): List<Square> {
-    return Tetromino.values().toList().shuffled().first().grid
-  }
-
-  private fun randomShapeColor(): Color {
-    return ShapeColors.values().toList().shuffled().first().color
   }
 
   fun rotatePlayer() {
