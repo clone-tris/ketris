@@ -91,7 +91,6 @@ class GamePanel(width: Int, height: Int) : JPanel() {
       }
     } catch (e: InterruptedException) {
     }
-
   }
 
   private fun clearRedrawLock() {

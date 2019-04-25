@@ -3,7 +3,6 @@ package com.ketris.framework.engine
 import java.util.Timer
 import java.util.TimerTask
 
-
 /**
  * todo : investigate how to make it show 60, cuz this is only TETRIS
  */
@@ -31,5 +30,4 @@ class GameFPS {
   fun value(): Int {
     return fps
   }
-
 }

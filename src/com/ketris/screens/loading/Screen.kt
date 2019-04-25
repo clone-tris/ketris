@@ -7,7 +7,6 @@ class Screen : IScreen {
   override val painter = ::Painter
 
   override fun paint(p: GraphicsPainter) {
-
   }
 }
 

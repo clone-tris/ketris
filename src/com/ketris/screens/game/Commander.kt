@@ -79,7 +79,6 @@ class Commander {
 //    log("result ${opponent.grid}")
   }
 
-
   private fun spawnPlayer(): Shape {
     val newPlayer = Shape(
       grid = randomShapeGrid(), row = 0, column = 0, color = randomShapeColor()
@@ -140,5 +139,4 @@ class Commander {
       inspect = false
     }
   }
-
 }

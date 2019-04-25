@@ -61,5 +61,4 @@ class Screen : IScreen {
       painter.drawPlayerInfo(commander.player)
     }
   }
-
 }
