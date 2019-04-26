@@ -4,8 +4,8 @@ import java.awt.event.KeyEvent
 import java.awt.event.MouseEvent
 import kotlin.reflect.KFunction
 
-interface IScreen {
-  val painterClass: KFunction<GraphicsPainter>
+interface IScreen<P> {
+  val painterClass: KFunction<P>
 
   /**
    * @param dt Delta time since last render in Miliseconds
@@ -15,7 +15,7 @@ interface IScreen {
   /**
    * @param p GraphicsPainter instance to paint with and info about the GamePanel
    */
-  fun paint(p: GraphicsPainter)
+  fun paint(painter: P)
 
   fun keyPressed(e: KeyEvent) {}
 

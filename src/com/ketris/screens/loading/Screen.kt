@@ -1,15 +1,14 @@
 package com.ketris.screens.loading
 
-import com.ketris.framework.engine.GraphicsPainter
 import com.ketris.framework.engine.IScreen
 import com.ketris.screens.game.*
 import com.ketris.screens.game.Painter
 
-class Screen : IScreen {
+class Screen : IScreen<Painter> {
   override val painterClass = ::Painter
-  val colorChangeRate = 500L
-  var nextColorChange = 0L
-  val loadingShape = Shape(
+  private val colorChangeRate = 500L
+  private var nextColorChange = 0L
+  private val loadingShape = Shape(
     grid = listOf(
       Square(0, 0),
       Square(1, 0),
@@ -65,12 +64,11 @@ class Screen : IScreen {
     }
   }
 
-  override fun paint(p: GraphicsPainter) {
-    val painter = p as Painter
+  override fun paint(painter: Painter) {
     paintLoading(painter)
   }
 
-  fun paintLoading(painter: Painter) {
+  private fun paintLoading(painter: Painter) {
     painter.drawShape(loadingShape)
   }
 }

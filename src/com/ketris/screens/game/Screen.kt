@@ -1,10 +1,9 @@
 package com.ketris.screens.game
 
-import com.ketris.framework.engine.GraphicsPainter
 import com.ketris.framework.engine.IScreen
 import java.awt.event.KeyEvent
 
-class Screen : IScreen {
+class Screen : IScreen<Painter> {
   private val commander = Commander()
   private var nextFall = 0L
   private var fallRate = 1000L
@@ -47,8 +46,7 @@ class Screen : IScreen {
     }
   }
 
-  override fun paint(p: GraphicsPainter) {
-    val painter = p as Painter
+  override fun paint(painter: Painter) {
     painter.drawBackground()
     painter.drawShape(commander.player)
     painter.drawShape(commander.opponent)
