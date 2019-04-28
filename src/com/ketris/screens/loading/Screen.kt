@@ -1,14 +1,13 @@
 package com.ketris.screens.loading
 
 import com.ketris.Config
-import com.ketris.framework.engine.IScreen
+import com.ketris.framework.engine.GameScreen
 import com.ketris.screens.game.Shape
 import com.ketris.screens.game.Square
 import com.ketris.screens.game.randomShapeColor
-import java.awt.image.BufferedImage
 
-class Screen : IScreen {
-  private val painter = Painter(Config.CANVAS_WIDTH, Config.CANVAS_HEIGHT)
+class Screen : GameScreen() {
+  override val painter = Painter(Config.CANVAS_WIDTH, Config.CANVAS_HEIGHT)
   private val colorChangeRate = 500L
   private var nextColorChange = 0L
   private val loadingShape = Shape(
@@ -67,9 +66,8 @@ class Screen : IScreen {
     }
   }
 
-  override fun paint(): BufferedImage {
+  override fun paint() {
     painter.clear()
     painter.drawShape(loadingShape)
-    return painter.canvas()
   }
 }
