@@ -11,8 +11,8 @@ import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.Graphics2D
 
-class Painter(g: Graphics2D, dt: Int, fps: GameFPS, debug: Boolean) : GraphicsPainter(
-  g, dt, fps, debug
+class Painter(g: Graphics2D, fps: GameFPS, debug: Boolean) : GraphicsPainter(
+  g, fps, debug
 ) {
 
   fun drawBackground() {
