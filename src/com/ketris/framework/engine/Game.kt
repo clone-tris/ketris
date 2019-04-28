@@ -1,7 +1,5 @@
-package com.ketris
+package com.ketris.framework.engine
 
-import com.ketris.framework.engine.GamePanel
-import com.ketris.framework.engine.GameScreen
 import kotlin.reflect.KFunction
 
 class Game(
