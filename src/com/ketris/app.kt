@@ -7,7 +7,7 @@ import com.ketris.screens.loading.Screen as LoadingScreen
 fun main(args: Array<String>) {
   java.awt.EventQueue.invokeLater {
     val game = Game(
-      screens = listOf(::LoadingScreen, ::MainScreen),
+      screen = ::LoadingScreen,
       width = Config.CANVAS_WIDTH,
       height = Config.CANVAS_HEIGHT
     )

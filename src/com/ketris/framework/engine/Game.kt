@@ -1,9 +1,15 @@
 package com.ketris.framework.engine
 
-import kotlin.reflect.KFunction
+typealias InstantiateScreen = (game: Game, width: Int, height: Int) -> GameScreen
 
 class Game(
-  val screens: List<KFunction<GameScreen>>, val width: Int, val height: Int
+  val screen: InstantiateScreen, val width: Int, val height: Int
 ) {
-  val canvas = GamePanel(width, height)
+  val canvas: GamePanel = GamePanel(
+    width = width, height = height, screen = screen(this, width, height), game = this
+  )
+
+  fun useScreen(newScreen: InstantiateScreen) {
+    canvas.screen = newScreen(this, width, height)
+  }
 }

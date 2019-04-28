@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent
 import java.awt.event.MouseEvent
 import java.awt.image.BufferedImage
 
-abstract class GameScreen {
+abstract class GameScreen(val game: Game, val width: Int, val height: Int) {
   protected abstract val painter: GraphicsPainter
   /**
    * @param dt Delta time since last render in Miliseconds

@@ -2,7 +2,6 @@ package com.ketris.framework.engine
 
 import com.ketris.framework.events.KeyManager
 import com.ketris.framework.events.MouseManager
-import com.ketris.screens.game.Screen
 import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.Toolkit
@@ -12,11 +11,10 @@ import javax.swing.JPanel
 const val FRAMES_PER_SECOND = 60
 val REFRESH_INTERVAL_MS: Long = TimeUnit.SECONDS.toMillis(1) / FRAMES_PER_SECOND
 
-class GamePanel(width: Int, height: Int) : JPanel() {
+class GamePanel(width: Int, height: Int, var screen: GameScreen, val game: Game) : JPanel() {
   private var timeLastRunMs = System.currentTimeMillis()
   private var isRunning: Boolean = true
   private val redrawLock = Object()
-  var screen: GameScreen = Screen()
   private var dt: Int = 0
   private var fps = GameFPS()
   private var keyManager = KeyManager(screen)
@@ -70,7 +68,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
       // layer 1 : current screen
       screen,
       // layer 2 overlay on top to show information about the game
-      Overlay(width, height)
+      Overlay(game, width, height)
     )
     // render all game layers
     layers.forEach { layer -> g.drawImage(layer.paintCanvas(), 0, 0, width, height, null) }

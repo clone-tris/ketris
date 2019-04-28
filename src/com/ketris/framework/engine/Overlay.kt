@@ -1,10 +1,9 @@
 package com.ketris.framework.engine
 
-import com.ketris.Config
 import com.ketris.screens.game.Painter
 
-class Overlay(val width: Int, val height: Int) : GameScreen() {
-  override val painter = Painter(Config.CANVAS_WIDTH, Config.CANVAS_HEIGHT)
+class Overlay(game: Game, width: Int, height: Int) : GameScreen(game, width, height) {
+  override val painter = Painter(width, height)
 
   override fun paint() {
     // Smoothing up things so that we get good graphics instead of pixely things

@@ -1,13 +1,15 @@
 package com.ketris.screens.loading
 
-import com.ketris.Config
+import com.ketris.framework.engine.Game
 import com.ketris.framework.engine.GameScreen
+import com.ketris.screens.game.Screen as MainGameScreen
 import com.ketris.screens.game.Shape
 import com.ketris.screens.game.Square
 import com.ketris.screens.game.randomShapeColor
+import java.awt.event.KeyEvent
 
-class Screen : GameScreen() {
-  override val painter = Painter(Config.CANVAS_WIDTH, Config.CANVAS_HEIGHT)
+class Screen(game: Game, width: Int, height: Int) : GameScreen(game, width, height) {
+  override val painter = Painter(width, height)
   private val colorChangeRate = 500L
   private var nextColorChange = 0L
   private val loadingShape = Shape(
@@ -57,6 +59,12 @@ class Screen : GameScreen() {
       Square(13, 6)
     ), row = 0, column = 0, color = randomShapeColor()
   )
+
+  override fun keyPressed(e: KeyEvent) {
+    when(e.keyCode) {
+      KeyEvent.VK_S -> game.useScreen(::MainGameScreen)
+    }
+  }
 
   override fun update(dt: Int) {
     val time = System.currentTimeMillis()

@@ -1,17 +1,16 @@
 package com.ketris.screens.game
 
-import com.ketris.Config.CANVAS_HEIGHT
-import com.ketris.Config.CANVAS_WIDTH
 import com.ketris.Config.DEBUG_GRAPHICS
+import com.ketris.framework.engine.Game
 import com.ketris.framework.engine.GameScreen
 import java.awt.event.KeyEvent
 
-class Screen : GameScreen() {
+class Screen(game: Game, width: Int, height: Int) : GameScreen(game, width, height) {
   private val commander = Commander()
   private var nextFall = 0L
   private var fallRate = 1000L
   private var wasAnimating = false
-  override val painter = Painter(CANVAS_WIDTH, CANVAS_HEIGHT)
+  override val painter = Painter(width, height)
 
   override fun update(dt: Int) {
     if (commander.animating) {
