@@ -1,6 +1,7 @@
 package com.ketris.screens.game
 
 import com.ketris.Config
+import com.ketris.Config.DEBUG_GRAPHICS
 import com.ketris.Config.PUZZLE_HEIGHT
 import com.ketris.Config.PUZZLE_WIDTH
 import com.ketris.framework.engine.GameFPS
@@ -11,8 +12,8 @@ import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.Graphics2D
 
-class Painter(g: Graphics2D, fps: GameFPS, debug: Boolean) : GraphicsPainter(
-  g, fps, debug
+class Painter(g: Graphics2D, fps: GameFPS) : GraphicsPainter(
+  g, fps
 ) {
 
   fun drawBackground() {
@@ -41,7 +42,7 @@ class Painter(g: Graphics2D, fps: GameFPS, debug: Boolean) : GraphicsPainter(
       )
     }
 
-    if (debug) {
+    if (DEBUG_GRAPHICS) {
       g.color = Color.BLUE
       g.drawRect(
         shape.column * SQUARE_WIDTH,
@@ -59,7 +60,7 @@ class Painter(g: Graphics2D, fps: GameFPS, debug: Boolean) : GraphicsPainter(
       column * SQUARE_WIDTH, row * SQUARE_WIDTH, color, border
     )
 
-    if (debug) {
+    if (DEBUG_GRAPHICS) {
       val margin = 10 * SQUARE_WIDTH / 100
       drawText("$row", column * SQUARE_WIDTH + margin, row * SQUARE_WIDTH + margin)
       drawText("$column", column * SQUARE_WIDTH + margin, row * SQUARE_WIDTH + margin + 12 + margin)
@@ -92,7 +93,7 @@ class Painter(g: Graphics2D, fps: GameFPS, debug: Boolean) : GraphicsPainter(
     )
   }
 
-  fun drawGuide() {
+  private fun drawGuide() {
     val canvasHeight = Config.CANVAS_HEIGHT
     val canvasWidth = Config.CANVAS_WIDTH
 

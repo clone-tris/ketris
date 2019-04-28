@@ -5,7 +5,7 @@ import java.awt.Color
 import java.awt.Font
 import java.awt.Graphics2D
 
-open class GraphicsPainter(val g: Graphics2D, var fps: GameFPS, var debug: Boolean) {
+open class GraphicsPainter(val g: Graphics2D, var fps: GameFPS) {
   private fun drawLine(x1: Int, y1: Int, x2: Int, y2: Int, color: Color, strokeWidth: Int) {
     g.stroke = BasicStroke(strokeWidth.toFloat())
     g.color = color

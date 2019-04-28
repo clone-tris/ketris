@@ -80,7 +80,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
     rh[RenderingHints.KEY_RENDERING] = RenderingHints.VALUE_RENDER_QUALITY
     g2D.setRenderingHints(rh)
 
-    screen.paint(screen.painterClass(g2D, fps, DEBUG_GRAPHICS))
+    screen.paint(screen.painterClass(g2D, fps))
     fps.increment()
 
     Toolkit.getDefaultToolkit().sync()
