@@ -4,25 +4,22 @@ import com.ketris.Config
 import com.ketris.Config.DEBUG_GRAPHICS
 import com.ketris.Config.PUZZLE_HEIGHT
 import com.ketris.Config.PUZZLE_WIDTH
-import com.ketris.framework.engine.GameFPS
 import com.ketris.Config.SQUARE_BORDER_WIDTH
 import com.ketris.Config.SQUARE_WIDTH
 import com.ketris.framework.engine.GraphicsPainter
+import com.ketris.screens.game.UIColors.BACKGROUND
 import java.awt.BasicStroke
 import java.awt.Color
-import java.awt.Graphics2D
 
-class Painter(g: Graphics2D, fps: GameFPS) : GraphicsPainter(
-  g, fps
-) {
-
+open class Painter(width: Int, height: Int) : GraphicsPainter(width, height) {
   fun drawBackground() {
+    clear()
     drawGuide()
   }
 
   fun drawFPS() {
-    val fps = fps.value().toString()
-    drawText(text = "FPS : $fps", x = 10, y = 10)
+//    val fps = fps.value().toString()
+//    drawText(text = "FPS : $fps", x = 10, y = 10)
   }
 
   fun drawPlayerInfo(player: Shape) {
@@ -91,6 +88,11 @@ class Painter(g: Graphics2D, fps: GameFPS) : GraphicsPainter(
       borderColor,
       SQUARE_BORDER_WIDTH
     )
+  }
+
+  fun clear() {
+    g.color = BACKGROUND
+    g.fillRect(0, 0, width, height)
   }
 
   private fun drawGuide() {

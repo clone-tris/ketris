@@ -2,11 +2,9 @@ package com.ketris.framework.engine
 
 import java.awt.event.KeyEvent
 import java.awt.event.MouseEvent
-import kotlin.reflect.KFunction
+import java.awt.image.BufferedImage
 
-interface IScreen<P> {
-  val painterClass: KFunction<P>
-
+interface IScreen {
   /**
    * @param dt Delta time since last render in Miliseconds
    */
@@ -15,7 +13,7 @@ interface IScreen<P> {
   /**
    * @param p GraphicsPainter instance to paint with and info about the GamePanel
    */
-  fun paint(painter: P)
+  fun paint(): BufferedImage
 
   fun keyPressed(e: KeyEvent) {}
 

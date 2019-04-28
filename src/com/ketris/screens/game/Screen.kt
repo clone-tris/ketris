@@ -1,14 +1,18 @@
 package com.ketris.screens.game
 
+import com.ketris.Config.CANVAS_HEIGHT
+import com.ketris.Config.CANVAS_WIDTH
+import com.ketris.Config.DEBUG_GRAPHICS
 import com.ketris.framework.engine.IScreen
 import java.awt.event.KeyEvent
+import java.awt.image.BufferedImage
 
-class Screen : IScreen<Painter> {
+class Screen : IScreen {
   private val commander = Commander()
   private var nextFall = 0L
   private var fallRate = 1000L
   private var wasAnimating = false
-  override val painterClass = ::Painter
+  private val painter = Painter(CANVAS_WIDTH, CANVAS_HEIGHT)
 
   override fun update(dt: Int) {
     if (commander.animating) {
@@ -46,17 +50,17 @@ class Screen : IScreen<Painter> {
     }
   }
 
-  override fun paint(painter: Painter) {
+  override fun paint(): BufferedImage {
     painter.drawBackground()
     painter.drawShape(commander.player)
     painter.drawShape(commander.opponent)
 
     // keep the following last as it need to be on top of everything
-
-    @Suppress("ConstantConditionIf")//
-    if (painter.debug) {
+    if (DEBUG_GRAPHICS) {
       painter.drawFPS()
       painter.drawPlayerInfo(commander.player)
     }
+
+    return painter.canvas()
   }
 }

@@ -1,11 +1,5 @@
 package com.ketris.screens.loading
 
-import com.ketris.framework.engine.GameFPS
-import com.ketris.framework.engine.GraphicsPainter
-import java.awt.Graphics2D
+import com.ketris.screens.game.Painter as GameScreenPainter
 
-class Painter(g: Graphics2D, fps: GameFPS) : GraphicsPainter(
-  g, fps
-) {
-
-}
+class Painter(width: Int, height: Int) : GameScreenPainter(width, height)

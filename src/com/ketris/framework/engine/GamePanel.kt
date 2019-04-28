@@ -1,14 +1,12 @@
 package com.ketris.framework.engine
 
-import com.ketris.Config.DEBUG_GRAPHICS
+import com.ketris.Config.CANVAS_HEIGHT
+import com.ketris.Config.CANVAS_WIDTH
 import com.ketris.framework.events.KeyManager
 import com.ketris.framework.events.MouseManager
-import com.ketris.screens.game.UIColors.BACKGROUND
-import com.ketris.screens.game.Screen
+import com.ketris.screens.loading.Screen
 import java.awt.Dimension
 import java.awt.Graphics
-import java.awt.Graphics2D
-import java.awt.RenderingHints
 import java.awt.Toolkit
 import java.util.concurrent.TimeUnit
 import javax.swing.JPanel
@@ -20,7 +18,7 @@ class GamePanel(width: Int, height: Int) : JPanel() {
   private var timeLastRunMs = System.currentTimeMillis()
   private var isRunning: Boolean = true
   private val redrawLock = Object()
-  private val screen = Screen()
+  private val screen: IScreen = Screen()
   private var dt: Int = 0
   private var fps = GameFPS()
   private var keyManager = KeyManager(screen)
@@ -29,7 +27,6 @@ class GamePanel(width: Int, height: Int) : JPanel() {
   init {
     preferredSize = Dimension(width, height)
     isFocusable = true
-    background = BACKGROUND
     addKeyListener(keyManager)
     addMouseListener(mouseManager)
   }
@@ -68,23 +65,22 @@ class GamePanel(width: Int, height: Int) : JPanel() {
     return System.currentTimeMillis() - t
   }
 
-  override fun paintComponent(g: Graphics?) {
+  override fun paintComponent(g: Graphics) {
     super.paintComponent(g)
     clearRedrawLock()
-    val g2D = g as Graphics2D
-
-    // Smoothing up things so that we get good graphics instead of pixely things
-    val rh = RenderingHints(
-      RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON
+    val layers = listOf(
+      // layer 1 : current screen
+      screen,
+      // layer 2 overlay on top to show information about the game
+      Overlay(CANVAS_WIDTH, CANVAS_HEIGHT)
     )
-    rh[RenderingHints.KEY_RENDERING] = RenderingHints.VALUE_RENDER_QUALITY
-    g2D.setRenderingHints(rh)
+    // render all game layers
+    layers.forEach { layer -> g.drawImage(layer.paint(), 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, null) }
 
-    screen.paint(screen.painterClass(g2D, fps))
     fps.increment()
 
     Toolkit.getDefaultToolkit().sync()
-    g2D.dispose()
+    g.dispose()
   }
 
   private fun waitForPaint() {
