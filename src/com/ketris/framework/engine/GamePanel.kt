@@ -1,7 +1,5 @@
 package com.ketris.framework.engine
 
-import com.ketris.framework.events.KeyManager
-import com.ketris.framework.events.MouseManager
 import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.Toolkit
@@ -17,14 +15,10 @@ class GamePanel(width: Int, height: Int, var screen: GameScreen, val game: Game)
   private val redrawLock = Object()
   private var dt: Int = 0
   private var fps = GameFPS()
-  private var keyManager = KeyManager(screen)
-  private var mouseManager = MouseManager(screen)
 
   init {
     preferredSize = Dimension(width, height)
     isFocusable = true
-    addKeyListener(keyManager)
-    addMouseListener(mouseManager)
   }
 
   fun startGameLoop() {

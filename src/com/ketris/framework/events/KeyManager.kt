@@ -1,6 +1,6 @@
 package com.ketris.framework.events
 
-import com.ketris.framework.engine.GameScreen
+import com.ketris.framework.engine.Game
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 
@@ -9,9 +9,9 @@ var sIsDown: Boolean = false
 var aIsDown: Boolean = false
 var dIsDown: Boolean = false
 
-class KeyManager(var screen: GameScreen) : KeyAdapter() {
+class KeyManager(var game: Game) : KeyAdapter() {
   override fun keyPressed(e: KeyEvent) {
-    screen.keyPressed(e)
+    game.keyPressed(e)
     when (e.keyCode) {
       KeyEvent.VK_W -> wIsDown = true
       KeyEvent.VK_S -> sIsDown = true
@@ -21,6 +21,7 @@ class KeyManager(var screen: GameScreen) : KeyAdapter() {
   }
 
   override fun keyReleased(e: KeyEvent) {
+    game.keyReleased(e)
     when (e.keyCode) {
       KeyEvent.VK_W -> wIsDown = false
       KeyEvent.VK_S -> sIsDown = false

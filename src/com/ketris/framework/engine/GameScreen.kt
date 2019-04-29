@@ -20,6 +20,6 @@ abstract class GameScreen(val game: Game, val width: Int, val height: Int) {
   }
 
   open fun keyPressed(e: KeyEvent) {}
-
-  fun mousePressed(e: MouseEvent) {}
+  open fun keyReleased(e: KeyEvent) {}
+  open fun mousePressed(e: MouseEvent) {}
 }
