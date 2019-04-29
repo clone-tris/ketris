@@ -9,7 +9,7 @@ class Sidebar(
   override val painter = Painter(width, height)
 
   override fun paint() {
-    painter.paintTest()
+    painter.background()
   }
 
 }

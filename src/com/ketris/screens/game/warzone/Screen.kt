@@ -65,6 +65,7 @@ class Screen(game: Game, width: Int, height: Int) : GameScreen(game, width, heig
     painter.drawBackground()
     painter.drawShape(commander.player)
     painter.drawShape(commander.opponent)
+    painter.drawText("Hello World", 20, 20)
 
     // keep the following last as it need to be on top of everything
     if (DEBUG_GRAPHICS) {
@@ -74,7 +75,6 @@ class Screen(game: Game, width: Int, height: Int) : GameScreen(game, width, heig
   }
 
   override fun paintCanvas(): BufferedImage {
-    println("here")
     val ketrisBuffer = super.paintCanvas()
     val sidebarBuffer = sideBar.paintCanvas()
 
