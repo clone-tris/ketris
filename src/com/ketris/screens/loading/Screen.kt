@@ -75,6 +75,7 @@ class Screen(game: Game, width: Int, height: Int) : GameScreen(game, width, heig
   }
 
   override fun paint() {
+    // todo : add Start button
     painter.clear()
     painter.drawShape(loadingShape)
   }

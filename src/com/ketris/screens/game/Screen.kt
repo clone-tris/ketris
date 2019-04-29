@@ -49,6 +49,11 @@ class Screen(game: Game, width: Int, height: Int) : GameScreen(game, width, heig
   }
 
   override fun paint() {
+    // todo : add score
+    // todo : level indicator
+    // todo : removed lines count
+    // todo : next shape preview
+
     painter.drawBackground()
     painter.drawShape(commander.player)
     painter.drawShape(commander.opponent)

@@ -10,10 +10,6 @@ class Window(title: String, canvas: GamePanel) : JFrame(title) {
   init {
     val windowPane = JPanel()
     windowPane.add(canvas)
-    // todo : add score
-    // todo : level indicator
-    // todo : removed lines count
-    // todo : next shape preview
 
     contentPane = windowPane
     pack()
