@@ -16,8 +16,8 @@ class Screen(game: Game, width: Int, height: Int) : GameScreen(game, width, heig
   private var nextFall = 0L
   private var fallRate = 1000L
   private var wasAnimating = false
-  override val painter = Painter(width, height)
-  val sideBar = Sidebar(game, width, height)
+  override val painter = Painter(WAR_ZONE_WIDTH, CANVAS_HEIGHT)
+  val sideBar = Sidebar(game, SIDEBAR_WIDTH, CANVAS_HEIGHT)
   val stitcher = GraphicsPainter(SIDEBAR_WIDTH + WAR_ZONE_WIDTH, CANVAS_HEIGHT)
 
   override fun update(dt: Int) {
