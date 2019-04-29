@@ -1,9 +1,15 @@
-package com.ketris.screens.game
+package com.ketris.screens.game.warzone
 
+import com.ketris.Config.CANVAS_HEIGHT
 import com.ketris.Config.DEBUG_GRAPHICS
+import com.ketris.Config.SIDEBAR_WIDTH
+import com.ketris.Config.WAR_ZONE_WIDTH
 import com.ketris.framework.engine.Game
 import com.ketris.framework.engine.GameScreen
+import com.ketris.framework.engine.GraphicsPainter
+import com.ketris.screens.game.sidebar.Sidebar
 import java.awt.event.KeyEvent
+import java.awt.image.BufferedImage
 
 class Screen(game: Game, width: Int, height: Int) : GameScreen(game, width, height) {
   private val commander = Commander()
@@ -11,6 +17,8 @@ class Screen(game: Game, width: Int, height: Int) : GameScreen(game, width, heig
   private var fallRate = 1000L
   private var wasAnimating = false
   override val painter = Painter(width, height)
+  val sideBar = Sidebar(game, width, height)
+  val stitcher = GraphicsPainter(SIDEBAR_WIDTH + WAR_ZONE_WIDTH, CANVAS_HEIGHT)
 
   override fun update(dt: Int) {
     if (commander.animating) {
@@ -63,5 +71,16 @@ class Screen(game: Game, width: Int, height: Int) : GameScreen(game, width, heig
       painter.drawFPS()
       painter.drawPlayerInfo(commander.player)
     }
+  }
+
+  override fun paintCanvas(): BufferedImage {
+    println("here")
+    val ketrisBuffer = super.paintCanvas()
+    val sidebarBuffer = sideBar.paintCanvas()
+
+    stitcher.g.drawImage(sidebarBuffer, 0, 0, SIDEBAR_WIDTH, CANVAS_HEIGHT, null)
+    stitcher.g.drawImage(ketrisBuffer, SIDEBAR_WIDTH, 0, WAR_ZONE_WIDTH, CANVAS_HEIGHT, null)
+
+    return stitcher.canvas()
   }
 }

@@ -14,7 +14,7 @@ abstract class GameScreen(val game: Game, val width: Int, val height: Int) {
 
   abstract fun paint()
 
-  fun paintCanvas(): BufferedImage {
+  open fun paintCanvas(): BufferedImage {
     paint()
     return painter.canvas()
   }

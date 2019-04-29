@@ -4,7 +4,7 @@ import java.awt.*
 import java.awt.image.BufferedImage
 import java.awt.image.IndexColorModel
 
-abstract class GraphicsPainter(val width: Int, val height: Int) {
+open class GraphicsPainter(val width: Int, val height: Int) {
   private val buffer = BufferedImage(width, height, IndexColorModel.TRANSLUCENT)
   val g = buffer.graphics as Graphics2D
 

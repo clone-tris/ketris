@@ -1,7 +1,10 @@
-package com.ketris.screens.game
+package com.ketris.screens.game.warzone
 
 import com.ketris.Config.PUZZLE_HEIGHT
 import com.ketris.Config.PUZZLE_WIDTH
+import com.ketris.screens.game.Shape
+import com.ketris.screens.game.randomShapeColor
+import com.ketris.screens.game.randomShapeGrid
 import log
 
 class Commander {
@@ -80,7 +83,10 @@ class Commander {
 
   private fun spawnPlayer(): Shape {
     val newPlayer = Shape(
-      grid = randomShapeGrid(), row = 0, column = 0, color = randomShapeColor()
+      grid = randomShapeGrid(),
+      row = 0,
+      column = 0,
+      color = randomShapeColor()
     )
     newPlayer.row -= newPlayer.height
     newPlayer.column = (PUZZLE_WIDTH - newPlayer.width) / 2
