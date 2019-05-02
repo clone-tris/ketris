@@ -19,51 +19,7 @@ class Screen(game: Game, width: Int, height: Int) : GameScreen(game, width, heig
   private val colorChangeRate = 500L
   private var nextColorChange = 0L
   private val loadingShape = Shape(
-    grid = listOf(
-      Square(1, 1),
-      Square(2, 1),
-      Square(3, 1),
-      Square(3, 2),
-      Square(1, 4),
-      Square(2, 4),
-      Square(3, 4),
-      Square(3, 5),
-      Square(3, 6),
-      Square(2, 6),
-      Square(1, 6),
-      Square(1, 5),
-      Square(2, 8),
-      Square(1, 9),
-      Square(2, 10),
-      Square(3, 10),
-      Square(3, 9),
-      Square(7, 1),
-      Square(8, 2),
-      Square(7, 3),
-      Square(6, 2),
-      Square(5, 3),
-      Square(6, 3),
-      Square(8, 5),
-      Square(7, 5),
-      Square(5, 5),
-      Square(8, 7),
-      Square(7, 7),
-      Square(6, 7),
-      Square(6, 8),
-      Square(6, 9),
-      Square(7, 9),
-      Square(8, 9),
-      Square(11, 1),
-      Square(10, 2),
-      Square(11, 3),
-      Square(12, 2),
-      Square(12, 3),
-      Square(13, 3),
-      Square(14, 2),
-      Square(14, 5),
-      Square(14, 6),
-      Square(14, 7)
-    ), row = 0, column = 0, color = randomShapeColor()
+    grid = loadingGrid, row = 0, column = 0, color = randomShapeColor()
   )
 
   override fun keyPressed(e: KeyEvent) {
