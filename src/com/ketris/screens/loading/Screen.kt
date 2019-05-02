@@ -24,7 +24,7 @@ class Screen(game: Game, width: Int, height: Int) : GameScreen(game, width, heig
 
   override fun keyPressed(e: KeyEvent) {
     when (e.keyCode) {
-      KeyEvent.VK_ENTER -> game.useScreen(::MainGameScreen)
+      KeyEvent.VK_S -> game.useScreen(::MainGameScreen)
     }
   }
 
