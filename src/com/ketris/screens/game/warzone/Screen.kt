@@ -1,11 +1,11 @@
 package com.ketris.screens.game.warzone
 
-import com.ketris.Config.DEBUG_GRAPHICS
-import com.ketris.Config.SIDEBAR_WIDTH
-import com.ketris.Config.WAR_ZONE_WIDTH
+import com.ketris.GameConfig.DEBUG_GRAPHICS
 import com.ketris.framework.engine.Game
 import com.ketris.framework.engine.GameScreen
 import com.ketris.framework.engine.GraphicsPainter
+import com.ketris.screens.game.Config.SIDEBAR_WIDTH
+import com.ketris.screens.game.Config.WAR_ZONE_WIDTH
 import com.ketris.screens.game.sidebar.Sidebar
 import java.awt.event.KeyEvent
 import java.awt.image.BufferedImage

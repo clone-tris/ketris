@@ -1,12 +1,11 @@
 package com.ketris.screens.loading
 
-import com.ketris.Config
 import com.ketris.framework.components.Button
 import com.ketris.framework.engine.Game
 import com.ketris.framework.engine.GameScreen
 import com.ketris.screens.game.warzone.Screen as MainGameScreen
 import com.ketris.screens.game.Shape
-import com.ketris.screens.game.Square
+import com.ketris.screens.game.Config
 import com.ketris.screens.game.randomShapeColor
 import java.awt.event.KeyEvent
 import java.awt.event.MouseEvent

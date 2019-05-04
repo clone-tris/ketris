@@ -1,7 +1,7 @@
 package com.ketris.screens.game.warzone
 
-import com.ketris.Config.PUZZLE_HEIGHT
-import com.ketris.Config.PUZZLE_WIDTH
+import com.ketris.screens.game.Config.PUZZLE_HEIGHT
+import com.ketris.screens.game.Config.PUZZLE_WIDTH
 import com.ketris.screens.game.Shape
 import com.ketris.screens.game.randomShapeColor
 import com.ketris.screens.game.randomShapeGrid

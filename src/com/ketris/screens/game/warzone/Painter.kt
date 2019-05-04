@@ -1,12 +1,13 @@
 package com.ketris.screens.game.warzone
 
-import com.ketris.Config
-import com.ketris.Config.DEBUG_GRAPHICS
-import com.ketris.Config.PUZZLE_HEIGHT
-import com.ketris.Config.PUZZLE_WIDTH
-import com.ketris.Config.SQUARE_BORDER_WIDTH
-import com.ketris.Config.SQUARE_WIDTH
 import com.ketris.framework.engine.GraphicsPainter
+import com.ketris.GameConfig.CANVAS_HEIGHT
+import com.ketris.GameConfig.DEBUG_GRAPHICS
+import com.ketris.screens.game.Config.PUZZLE_HEIGHT
+import com.ketris.screens.game.Config.PUZZLE_WIDTH
+import com.ketris.screens.game.Config.SQUARE_BORDER_WIDTH
+import com.ketris.screens.game.Config.SQUARE_WIDTH
+import com.ketris.screens.game.Config.WAR_ZONE_WIDTH
 import com.ketris.screens.game.Shape
 import com.ketris.screens.game.UIColors
 import com.ketris.screens.game.UIColors.BACKGROUND
@@ -98,20 +99,18 @@ open class Painter(width: Int, height: Int) : GraphicsPainter(width, height) {
   }
 
   private fun drawGuide() {
-    val canvasHeight = Config.CANVAS_HEIGHT
-    val canvasWidth = Config.WAR_ZONE_WIDTH
+    val canvasHeight = CANVAS_HEIGHT
+    val canvasWidth = WAR_ZONE_WIDTH
 
     for (i in 0 until PUZZLE_HEIGHT + 1) {
       drawLine(
-        0, i * SQUARE_WIDTH, canvasWidth, i * SQUARE_WIDTH,
-        UIColors.GUIDE, 1
+        0, i * SQUARE_WIDTH, canvasWidth, i * SQUARE_WIDTH, UIColors.GUIDE, 1
       )
     }
 
     for (i in 0 until PUZZLE_WIDTH + 1) {
       drawLine(
-        i * SQUARE_WIDTH, 0, i * SQUARE_WIDTH, canvasHeight,
-        UIColors.GUIDE, 1
+        i * SQUARE_WIDTH, 0, i * SQUARE_WIDTH, canvasHeight, UIColors.GUIDE, 1
       )
     }
   }

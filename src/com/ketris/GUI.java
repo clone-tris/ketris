@@ -91,7 +91,7 @@ public class GUI extends JFrame {
 
   private void createUIComponents() {
 //    canvas = new GamePanel(
-//      Config.CANVAS_WIDTH, Config.CANVAS_HEIGHT
+//      GameConfig.CANVAS_WIDTH, GameConfig.CANVAS_HEIGHT
 //    );
   }
 }

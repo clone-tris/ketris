@@ -8,8 +8,8 @@ fun main(args: Array<String>) {
   java.awt.EventQueue.invokeLater {
     val game = Game(
       screen = ::MainScreen,
-      width = Config.CANVAS_WIDTH,
-      height = Config.CANVAS_HEIGHT
+      width = GameConfig.CANVAS_WIDTH,
+      height = GameConfig.CANVAS_HEIGHT
     )
 
     Window(title = "Ketris", canvas = game.canvas)
