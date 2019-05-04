@@ -35,7 +35,14 @@ class Screen(val game: Game, val width: Int, val height: Int) : GameScreen {
     val time = System.currentTimeMillis()
     if (time >= nextFall) {
       nextFall = time + fallRate
-      commander.fallDown()
+      handlePlayerFalling()
+    }
+  }
+
+  private fun handlePlayerFalling() {
+    val weHaveANewPlayer = commander.fallDown()
+    if (weHaveANewPlayer) {
+
     }
   }
 
@@ -43,7 +50,7 @@ class Screen(val game: Game, val width: Int, val height: Int) : GameScreen {
     if (!commander.gameEnded) {
       when (e.keyCode) {
         KeyEvent.VK_W -> commander.rotatePlayer()
-        KeyEvent.VK_S -> commander.fallDown()
+        KeyEvent.VK_S -> handlePlayerFalling()
         KeyEvent.VK_A -> commander.moveLeft()
         KeyEvent.VK_D -> commander.moveRight()
         KeyEvent.VK_R -> commander.restart()
@@ -57,9 +64,9 @@ class Screen(val game: Game, val width: Int, val height: Int) : GameScreen {
 
   override fun paint() {
     // todo : add score
-    // todo : level indicator
     // todo : removed lines count
     // todo : next shape preview
+    // todo : level indicator
 
     painter.drawBackground()
     painter.drawShape(commander.player)

@@ -6,6 +6,6 @@ fun randomShapeColor(): Color {
   return ShapeColors.values().toList().shuffled().first().color
 }
 
-fun randomShapeGrid(): List<Square> {
-  return Tetromino.values().toList().shuffled().first().grid
+fun randomTetromino(): Tetromino {
+  return Tetromino.values().toList().shuffled().first()
 }

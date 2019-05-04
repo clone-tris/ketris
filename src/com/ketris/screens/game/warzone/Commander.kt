@@ -3,12 +3,12 @@ package com.ketris.screens.game.warzone
 import com.ketris.screens.game.Config.PUZZLE_HEIGHT
 import com.ketris.screens.game.Config.PUZZLE_WIDTH
 import com.ketris.screens.game.Shape
-import com.ketris.screens.game.randomShapeColor
-import com.ketris.screens.game.randomShapeGrid
+import com.ketris.screens.game.randomTetromino
 import log
 
 class Commander {
-  var player = spawnPlayer()
+  var player = createPlayer()
+  var nextPlayer = createPlayer()
   val opponent = Shape(
     grid = emptyList(),
     row = 0,
@@ -34,7 +34,7 @@ class Commander {
 
   fun restart() {
     opponent.grid = emptyList()
-    player = spawnPlayer()
+    player = createPlayer()
   }
 
   private fun removeFullLines() {
@@ -81,16 +81,16 @@ class Commander {
 //    log("result ${opponent.grid}")
   }
 
-  private fun spawnPlayer(): Shape {
-    val newPlayer = Shape(
-      grid = randomShapeGrid(),
-      row = 0,
-      column = 0,
-      color = randomShapeColor()
-    )
-    newPlayer.row -= newPlayer.height
-    newPlayer.column = (PUZZLE_WIDTH - newPlayer.width) / 2
-    return newPlayer
+  private fun createPlayer(): Shape {
+    val tetromino = randomTetromino()
+    return Shape(grid = tetromino.grid, row = 0, column = 0, color = tetromino.color)
+  }
+
+  private fun spawnPlayer() {
+    nextPlayer.row -= nextPlayer.height
+    nextPlayer.column = (PUZZLE_WIDTH - nextPlayer.width) / 2
+    player = nextPlayer
+    nextPlayer = createPlayer()
   }
 
   fun rotatePlayer() {
@@ -102,24 +102,23 @@ class Commander {
     player = futurePlayer
   }
 
-  private fun movePlayer(rowDirection: Int, columnDirection: Int) {
+  private fun movePlayer(rowDirection: Int, columnDirection: Int): Boolean {
     val futurePlayer = player.copy()
     futurePlayer.move(rowDirection, columnDirection)
-    val canMove = !futurePlayer.collidesWith(opponent) && futurePlayer.withinBounds()
-    if (canMove) {
+    val movedSuccessfuly = !futurePlayer.collidesWith(opponent) && futurePlayer.withinBounds()
+    if (movedSuccessfuly) {
       player = futurePlayer
     } else {
       if (rowDirection == +1) {
         eatPlayer()
-
-        val newPlayer = spawnPlayer()
-        if (newPlayer.collidesWith(opponent)) {
+        spawnPlayer()
+        if (player.collidesWith(opponent)) {
           gameOver()
-          return
+          return false
         }
-        player = newPlayer
       }
     }
+    return movedSuccessfuly
   }
 
   fun moveRight() {
@@ -130,10 +129,11 @@ class Commander {
     movePlayer(0, -1)
   }
 
-  fun fallDown() {
-    movePlayer(+1, 0)
+  fun fallDown(): Boolean {
+    val diIMoveThough = movePlayer(+1, 0)
     if (inspect) {
       inspect = false
     }
+    return diIMoveThough
   }
 }
