@@ -11,7 +11,7 @@ import com.ketris.screens.game.sidebar.Sidebar
 import java.awt.event.KeyEvent
 import java.awt.image.BufferedImage
 
-class Screen(game: Game, width: Int, height: Int) : GameScreen(game, width, height) {
+class Screen(game: Game, width: Int, height: Int) : GameScreen() {
   private val commander = Commander()
   private var nextFall = 0L
   private var fallRate = 1000L
@@ -65,7 +65,6 @@ class Screen(game: Game, width: Int, height: Int) : GameScreen(game, width, heig
     painter.drawBackground()
     painter.drawShape(commander.player)
     painter.drawShape(commander.opponent)
-    painter.drawText("Hello World", 20, 20)
 
     // keep the following last as it need to be on top of everything
     if (DEBUG_GRAPHICS) {
