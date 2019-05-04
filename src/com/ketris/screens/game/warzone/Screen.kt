@@ -11,13 +11,13 @@ import com.ketris.screens.game.sidebar.Sidebar
 import java.awt.event.KeyEvent
 import java.awt.image.BufferedImage
 
-class Screen(game: Game, width: Int, height: Int) : GameScreen() {
+class Screen(game: Game, width: Int, height: Int) : GameScreen {
   private val commander = Commander()
   private var nextFall = 0L
   private var fallRate = 1000L
   private var wasAnimating = false
   override val painter = Painter(WAR_ZONE_WIDTH, CANVAS_HEIGHT)
-  val sideBar = Sidebar(game, SIDEBAR_WIDTH, CANVAS_HEIGHT)
+  val sideBar = Sidebar(SIDEBAR_WIDTH, CANVAS_HEIGHT)
   val stitcher = GraphicsPainter(SIDEBAR_WIDTH + WAR_ZONE_WIDTH, CANVAS_HEIGHT)
 
   override fun update(dt: Int) {

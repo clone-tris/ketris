@@ -4,22 +4,20 @@ import java.awt.event.KeyEvent
 import java.awt.event.MouseEvent
 import java.awt.image.BufferedImage
 
-abstract class GameScreen {
-  protected abstract val painter: GraphicsPainter
+interface GameScreen {
+  val painter: GraphicsPainter
   /**
    * @param dt Delta time since last render in Miliseconds
    */
+  fun update(dt: Int) {}
 
-  open fun update(dt: Int) {}
-
-  abstract fun paint()
-
-  open fun paintCanvas(): BufferedImage {
+  fun paint()
+  fun paintCanvas(): BufferedImage {
     paint()
     return painter.canvas()
   }
 
-  open fun keyPressed(e: KeyEvent) {}
-  open fun keyReleased(e: KeyEvent) {}
-  open fun mousePressed(e: MouseEvent) {}
+  fun keyPressed(e: KeyEvent) {}
+  fun keyReleased(e: KeyEvent) {}
+  fun mousePressed(e: MouseEvent) {}
 }
