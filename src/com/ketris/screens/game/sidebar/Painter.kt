@@ -1,11 +1,16 @@
 package com.ketris.screens.game.sidebar
 
-import com.ketris.framework.engine.GraphicsPainter
-import java.awt.Color
+import com.ketris.screens.game.Config.SQUARE_WIDTH
+import com.ketris.screens.game.warzone.Painter
+import java.awt.Rectangle
 
-open class Painter(width: Int, height: Int) : GraphicsPainter(width, height) {
+open class Painter(width: Int, height: Int) : Painter(width, height) {
   fun background() {
-    g.color = Color.DARK_GRAY
-    g.fillRect(0, 0, width, height)
+    clear()
+    drawSmallGuide()
+  }
+
+  fun drawSmallGuide() {
+    drawGuide(Rectangle(SQUARE_WIDTH, SQUARE_WIDTH, SQUARE_WIDTH * 4, SQUARE_WIDTH * 2))
   }
 }

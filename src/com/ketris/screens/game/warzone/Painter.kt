@@ -1,18 +1,15 @@
 package com.ketris.screens.game.warzone
 
 import com.ketris.framework.engine.GraphicsPainter
-import com.ketris.GameConfig.CANVAS_HEIGHT
 import com.ketris.GameConfig.DEBUG_GRAPHICS
-import com.ketris.screens.game.Config.PUZZLE_HEIGHT
-import com.ketris.screens.game.Config.PUZZLE_WIDTH
 import com.ketris.screens.game.Config.SQUARE_BORDER_WIDTH
 import com.ketris.screens.game.Config.SQUARE_WIDTH
-import com.ketris.screens.game.Config.WAR_ZONE_WIDTH
 import com.ketris.screens.game.Shape
 import com.ketris.screens.game.UIColors
 import com.ketris.screens.game.UIColors.BACKGROUND
 import java.awt.BasicStroke
 import java.awt.Color
+import java.awt.Rectangle
 
 open class Painter(width: Int, height: Int) : GraphicsPainter(width, height) {
   fun drawBackground() {
@@ -35,18 +32,16 @@ open class Painter(width: Int, height: Int) : GraphicsPainter(width, height) {
     g.drawLine(x1, y1, x2, y2)
   }
 
-  fun drawShape(shape: Shape) {
+  fun drawShape(shape: Shape, row: Int = shape.row, column: Int = shape.column) {
     shape.grid.forEach { square ->
-      drawSquareAt(
-        shape.row + square.row, shape.column + square.column, square.color
-      )
+      drawSquareAt(row + square.row, column + square.column, square.color)
     }
 
     if (DEBUG_GRAPHICS) {
       g.color = Color.BLUE
       g.drawRect(
-        shape.column * SQUARE_WIDTH,
-        shape.row * SQUARE_WIDTH,
+        column * SQUARE_WIDTH,
+        row * SQUARE_WIDTH,
         shape.width * SQUARE_WIDTH,
         shape.height * SQUARE_WIDTH
       )
@@ -98,19 +93,21 @@ open class Painter(width: Int, height: Int) : GraphicsPainter(width, height) {
     g.fillRect(0, 0, width, height)
   }
 
-  private fun drawGuide() {
-    val canvasHeight = CANVAS_HEIGHT
-    val canvasWidth = WAR_ZONE_WIDTH
+  fun drawGuide(bounds: Rectangle = Rectangle(0, 0, width, height)) {
+    val puzzleHeight = bounds.height / SQUARE_WIDTH
+    val puzzleWidth = bounds.width / SQUARE_WIDTH
 
-    for (i in 0 until PUZZLE_HEIGHT + 1) {
+    for (i in 0 until puzzleHeight + 1) {
+      val y = bounds.x + i * SQUARE_WIDTH
       drawLine(
-        0, i * SQUARE_WIDTH, canvasWidth, i * SQUARE_WIDTH, UIColors.GUIDE, 1
+        bounds.x, y, bounds.x + bounds.width, y, UIColors.GUIDE, 1
       )
     }
 
-    for (i in 0 until PUZZLE_WIDTH + 1) {
+    for (i in 0 until puzzleWidth + 1) {
+      val x = bounds.y + i * SQUARE_WIDTH
       drawLine(
-        i * SQUARE_WIDTH, 0, i * SQUARE_WIDTH, canvasHeight, UIColors.GUIDE, 1
+        x, bounds.y, x, bounds.y + bounds.height, UIColors.GUIDE, 1
       )
     }
   }

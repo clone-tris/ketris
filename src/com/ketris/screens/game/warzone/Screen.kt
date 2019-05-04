@@ -16,7 +16,7 @@ class Screen(val game: Game, val width: Int, val height: Int) : GameScreen {
   private var fallRate = 1000L
   private var wasAnimating = false
   override val painter = Painter(WAR_ZONE_WIDTH, height)
-  val sideBar = Sidebar(SIDEBAR_WIDTH, height)
+  val sideBar = Sidebar(SIDEBAR_WIDTH, height, commander.nextPlayer)
   val stitcher = GraphicsPainter(SIDEBAR_WIDTH + WAR_ZONE_WIDTH, height)
 
   override fun update(dt: Int) {
@@ -42,7 +42,7 @@ class Screen(val game: Game, val width: Int, val height: Int) : GameScreen {
   private fun handlePlayerFalling() {
     val weHaveANewPlayer = commander.fallDown()
     if (weHaveANewPlayer) {
-
+      sideBar.nextPlayer = commander.nextPlayer
     }
   }
 
