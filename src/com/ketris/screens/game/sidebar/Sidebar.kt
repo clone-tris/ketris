@@ -9,5 +9,8 @@ class Sidebar(val width: Int, val height: Int, var nextPlayer: Shape) : GameScre
   override fun paint() {
     painter.background()
     painter.drawShape(shape = nextPlayer, row = 1, column = 1)
+    painter.drawLevel()
+    painter.drawLinesCleared()
+    painter.drawScore()
   }
 }
