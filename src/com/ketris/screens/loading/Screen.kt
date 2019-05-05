@@ -3,7 +3,7 @@ package com.ketris.screens.loading
 import com.ketris.framework.components.Button
 import com.ketris.framework.engine.Game
 import com.ketris.framework.engine.GameScreen
-import com.ketris.screens.game.warzone.Screen as MainGameScreen
+import com.ketris.screens.game.playfield.Screen as MainGameScreen
 import com.ketris.screens.game.Shape
 import com.ketris.screens.game.Config
 import com.ketris.screens.game.randomShapeColor

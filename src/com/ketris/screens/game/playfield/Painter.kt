@@ -1,4 +1,4 @@
-package com.ketris.screens.game.warzone
+package com.ketris.screens.game.playfield
 
 import com.ketris.framework.engine.GraphicsPainter
 import com.ketris.GameConfig.DEBUG_GRAPHICS

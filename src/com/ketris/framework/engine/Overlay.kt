@@ -1,6 +1,6 @@
 package com.ketris.framework.engine
 
-import com.ketris.screens.game.warzone.Painter
+import com.ketris.screens.game.playfield.Painter
 
 class Overlay(game: Game, width: Int, height: Int) : GameScreen {
   override val painter = Painter(width, height)

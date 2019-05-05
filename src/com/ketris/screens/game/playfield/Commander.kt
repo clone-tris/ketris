@@ -1,7 +1,8 @@
-package com.ketris.screens.game.warzone
+package com.ketris.screens.game.playfield
 
 import com.ketris.screens.game.Config.PUZZLE_HEIGHT
 import com.ketris.screens.game.Config.PUZZLE_WIDTH
+import com.ketris.screens.game.Score
 import com.ketris.screens.game.Shape
 import com.ketris.screens.game.randomTetromino
 import log
@@ -29,7 +30,21 @@ class Commander {
 
   private fun eatPlayer() {
     opponent.grid = opponent.grid.union(player.absoluteGrid()).toList()
-    removeFullLines()
+    val linesRemoved = removeFullLines()
+    if (linesRemoved == 0) {
+      return
+    }
+    val points = when (linesRemoved) {
+      1 -> 40
+      2 -> 100
+      3 -> 300
+      4 -> 1200
+      else -> 0
+    } * (Score.level + 1)
+
+    Score.total += points
+    Score.linesCleared += linesRemoved
+    Score.level = Score.linesCleared % 10
   }
 
   fun restart() {
@@ -37,9 +52,7 @@ class Commander {
     player = createPlayer()
   }
 
-  private fun removeFullLines() {
-//    log("Testing for full lines, after dropping ${player.grid}")
-
+  private fun removeFullLines(): Int {
     val squaresInRows = opponent.grid.fold(mutableMapOf<Int, Int>()) { acc, square ->
       val row = square.row
       val rowCount = acc.getOrPut(row) { 0 }
@@ -56,17 +69,10 @@ class Commander {
     val fullRows = squaresInRows.filter { it.value == PUZZLE_WIDTH }.keys.sorted()
 
     if (fullRows.isEmpty()) {
-      return
+      return 0
     }
 
-//    log("removing full rows : (Size : ${fullRows.size}) $fullRows")
-//    log("Original grid : ${opponent.grid}")
-
-    val filteredGrid = opponent.grid
-      // remove full lines from grid
-      .filter { (row) -> row !in fullRows }
-
-//    log("remaining rows : $filteredGrid")
+    val filteredGrid = opponent.grid.filter { (row) -> row !in fullRows }
 
     opponent.grid = filteredGrid.map { square ->
       val copy = square.copy()
@@ -78,7 +84,7 @@ class Commander {
       copy
     }
 
-//    log("result ${opponent.grid}")
+    return fullRows.size
   }
 
   private fun createPlayer(): Shape {

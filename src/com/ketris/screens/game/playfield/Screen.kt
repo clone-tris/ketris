@@ -1,4 +1,4 @@
-package com.ketris.screens.game.warzone
+package com.ketris.screens.game.playfield
 
 import com.ketris.GameConfig.DEBUG_GRAPHICS
 import com.ketris.framework.engine.Game
@@ -65,7 +65,6 @@ class Screen(val game: Game, val width: Int, val height: Int) : GameScreen {
   override fun paint() {
     // todo : add score
     // todo : removed lines count
-    // todo : next shape preview
     // todo : level indicator
 
     painter.drawBackground()
