@@ -4,12 +4,12 @@ import com.ketris.framework.engine.Game
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 
-var wIsDown: Boolean = false
-var sIsDown: Boolean = false
-var aIsDown: Boolean = false
-var dIsDown: Boolean = false
-
 class KeyManager(var game: Game) : KeyAdapter() {
+  var wIsDown: Boolean = false
+  var sIsDown: Boolean = false
+  var aIsDown: Boolean = false
+  var dIsDown: Boolean = false
+
   override fun keyPressed(e: KeyEvent) {
     game.keyPressed(e)
     when (e.keyCode) {
