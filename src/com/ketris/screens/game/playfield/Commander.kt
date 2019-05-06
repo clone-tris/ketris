@@ -48,7 +48,7 @@ class Commander {
 
     Score.total += points
     Score.linesCleared += linesRemoved
-    Score.level = Score.linesCleared % 10
+    Score.level = Score.linesCleared / 10
   }
 
   fun restart() {
