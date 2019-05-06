@@ -14,7 +14,7 @@ class Game(
     width = width, height = height, screen = screen(this, width, height), game = this
   )
   private var keyManager = KeyManager(this)
-  private var mouseManager = MouseManager(this)
+  private var mouseManager = MouseManager()
 
   init {
     canvas.addKeyListener(keyManager)
@@ -28,10 +28,8 @@ class Game(
   fun keyPressed(e: KeyEvent) {
     canvas.screen.keyPressed(e)
   }
+
   fun keyReleased(e: KeyEvent) {
     canvas.screen.keyReleased(e)
-  }
-  fun mousePressed(e: MouseEvent) {
-    canvas.screen.mousePressed(e)
   }
 }

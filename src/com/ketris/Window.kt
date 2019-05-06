@@ -8,15 +8,12 @@ import javax.swing.WindowConstants
 
 class Window(title: String, canvas: GamePanel) : JFrame(title) {
   init {
-    val windowPane = JPanel()
-    windowPane.add(canvas)
-
-    contentPane = windowPane
+    contentPane = canvas
     pack()
 
     isVisible = true
     // at home
-    location = Point(1000, 110)
+    location = Point(1400, 110)
 
     // at work
 //    location = Point(1200, 410)
