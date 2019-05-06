@@ -34,6 +34,10 @@ class Commander {
     if (linesRemoved == 0) {
       return
     }
+    applyScore(linesRemoved)
+  }
+
+  fun applyScore(linesRemoved: Int) {
     val points = when (linesRemoved) {
       1 -> 40
       2 -> 100
