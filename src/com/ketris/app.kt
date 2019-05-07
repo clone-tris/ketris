@@ -7,10 +7,9 @@ import com.ketris.screens.loading.Screen as LoadingScreen
 fun main(args: Array<String>) {
   java.awt.EventQueue.invokeLater {
     val game = Game(
-      screen = ::LoadingScreen,
-      width = GameConfig.CANVAS_WIDTH,
-      height = GameConfig.CANVAS_HEIGHT
+      screen = ::LoadingScreen, width = GameConfig.CANVAS_WIDTH, height = GameConfig.CANVAS_HEIGHT
     )
 
     Window(title = "Ketris", canvas = game.canvas)
+  }
 }

@@ -20,4 +20,5 @@ interface GameScreen {
   fun keyPressed(e: KeyEvent) {}
   fun keyReleased(e: KeyEvent) {}
   fun mousePressed(e: MouseEvent) {}
+  fun unload() {}
 }

@@ -1,4 +1,4 @@
-package com.ketris.framework.events
+package com.ketris.framework.io
 
 import com.ketris.framework.engine.Game
 import java.awt.event.KeyAdapter

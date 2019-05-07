@@ -3,6 +3,8 @@ package com.ketris.screens.loading
 import com.ketris.framework.components.Button
 import com.ketris.framework.engine.Game
 import com.ketris.framework.engine.GameScreen
+import com.ketris.framework.io.IListensToMouse
+import com.ketris.framework.io.MouseManager
 import com.ketris.screens.game.playfield.Screen as MainGameScreen
 import com.ketris.screens.game.Shape
 import com.ketris.screens.game.Config
@@ -10,7 +12,7 @@ import com.ketris.screens.game.randomShapeColor
 import java.awt.event.KeyEvent
 import java.awt.event.MouseEvent
 
-class Screen(val game: Game, width: Int, height: Int) : GameScreen {
+class Screen(val game: Game, width: Int, height: Int) : GameScreen, IListensToMouse {
   override val painter = Painter(width, height)
   val startButton = Button(
     text = "Start (S)", x = 6 * Config.SQUARE_WIDTH, y = 17 * Config.SQUARE_WIDTH
@@ -20,6 +22,8 @@ class Screen(val game: Game, width: Int, height: Int) : GameScreen {
   private val loadingShape = Shape(
     grid = loadingGrid, row = 0, column = 0, color = randomShapeColor()
   )
+
+  private val mouseManager = MouseManager.addListener(this)
 
   override fun keyPressed(e: KeyEvent) {
     when (e.keyCode) {
@@ -45,5 +49,9 @@ class Screen(val game: Game, width: Int, height: Int) : GameScreen {
     painter.clear()
     painter.drawShape(loadingShape)
     painter.drawButton(startButton)
+  }
+
+  override fun unload() {
+    MouseManager.removeListener(this)
   }
 }

@@ -1,9 +1,7 @@
 package com.ketris.framework.engine
 
-import com.ketris.framework.events.KeyManager
-import com.ketris.framework.events.MouseManager
+import com.ketris.framework.io.KeyManager
 import java.awt.event.KeyEvent
-import java.awt.event.MouseEvent
 
 typealias InstantiateScreen = (game: Game, width: Int, height: Int) -> GameScreen
 
@@ -14,14 +12,13 @@ class Game(
     width = width, height = height, screen = screen(this, width, height), game = this
   )
   private var keyManager = KeyManager(this)
-  private var mouseManager = MouseManager()
 
   init {
     canvas.addKeyListener(keyManager)
-    canvas.addMouseListener(mouseManager)
   }
 
   fun useScreen(newScreen: InstantiateScreen) {
+    canvas.screen.unload()
     canvas.screen = newScreen(this, width, height)
   }
 
