@@ -1,5 +1,6 @@
 package com.ketris.framework.engine
 
+import com.ketris.framework.io.KeyManager
 import com.ketris.framework.io.MouseManager
 import java.awt.Dimension
 import java.awt.Graphics
@@ -21,6 +22,7 @@ class GamePanel(width: Int, height: Int, var screen: GameScreen, val game: Game)
     preferredSize = Dimension(width, height)
     isFocusable = true
     addMouseListener(MouseManager)
+    addKeyListener(KeyManager)
   }
 
   fun startGameLoop() {

@@ -4,20 +4,26 @@ import com.ketris.GameConfig.DEBUG_GRAPHICS
 import com.ketris.framework.engine.Game
 import com.ketris.framework.engine.GameScreen
 import com.ketris.framework.engine.GraphicsPainter
+import com.ketris.framework.io.IListenToKeyboard
+import com.ketris.framework.io.KeyManager
 import com.ketris.screens.game.Config.SIDEBAR_WIDTH
 import com.ketris.screens.game.Config.WAR_ZONE_WIDTH
 import com.ketris.screens.game.sidebar.Sidebar
 import java.awt.event.KeyEvent
 import java.awt.image.BufferedImage
 
-class Screen(val game: Game, val width: Int, val height: Int) : GameScreen {
+class Screen(val game: Game, val width: Int, val height: Int) : GameScreen, IListenToKeyboard {
   private val commander = Commander()
   private var nextFall = 0L
   private var fallRate = 1000L
   private var wasAnimating = false
   override val painter = Painter(WAR_ZONE_WIDTH, height)
-  val sideBar = Sidebar(SIDEBAR_WIDTH, height, commander.nextPlayer)
-  val stitcher = GraphicsPainter(SIDEBAR_WIDTH + WAR_ZONE_WIDTH, height)
+  private val sideBar = Sidebar(SIDEBAR_WIDTH, height, commander.nextPlayer)
+  private val stitcher = GraphicsPainter(SIDEBAR_WIDTH + WAR_ZONE_WIDTH, height)
+
+  init {
+    KeyManager.addListener(this)
+  }
 
   override fun update(dt: Int) {
     if (commander.animating) {
@@ -63,10 +69,6 @@ class Screen(val game: Game, val width: Int, val height: Int) : GameScreen {
   }
 
   override fun paint() {
-    // todo : add score
-    // todo : removed lines count
-    // todo : level indicator
-
     painter.drawBackground()
     painter.drawShape(commander.player)
     painter.drawShape(commander.opponent)
