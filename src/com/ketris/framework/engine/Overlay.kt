@@ -2,7 +2,7 @@ package com.ketris.framework.engine
 
 import com.ketris.screens.game.playfield.Painter
 
-class Overlay(game: Game, width: Int, height: Int) : GameScreen {
+class Overlay(width: Int, height: Int) : GameScreen {
   override val painter = Painter(width, height)
 
   override fun paint() {

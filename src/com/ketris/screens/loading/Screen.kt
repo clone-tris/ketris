@@ -14,7 +14,7 @@ import com.ketris.screens.game.randomShapeColor
 import java.awt.event.KeyEvent
 import java.awt.event.MouseEvent
 
-class Screen(val game: Game, width: Int, height: Int) : GameScreen,
+class Screen(width: Int, height: Int) : GameScreen,
   IListenToMouse,
   IListenToKeyboard {
   override val painter = Painter(width, height)
@@ -34,13 +34,13 @@ class Screen(val game: Game, width: Int, height: Int) : GameScreen,
 
   override fun keyPressed(e: KeyEvent) {
     when (e.keyCode) {
-      KeyEvent.VK_S -> game.useScreen(::MainGameScreen)
+      KeyEvent.VK_S -> Game.useScreen(::MainGameScreen)
     }
   }
 
   override fun mousePressed(e: MouseEvent) {
     if (startButton.bounds.contains(e.point)) {
-      game.useScreen(::MainGameScreen)
+      Game.useScreen(::MainGameScreen)
     }
   }
 

@@ -1,7 +1,6 @@
 package com.ketris.screens.game.playfield
 
 import com.ketris.GameConfig.DEBUG_GRAPHICS
-import com.ketris.framework.engine.Game
 import com.ketris.framework.engine.GameScreen
 import com.ketris.framework.engine.GraphicsPainter
 import com.ketris.framework.io.IListenToKeyboard
@@ -12,7 +11,7 @@ import com.ketris.screens.game.sidebar.Sidebar
 import java.awt.event.KeyEvent
 import java.awt.image.BufferedImage
 
-class Screen(val game: Game, val width: Int, val height: Int) : GameScreen, IListenToKeyboard {
+class Screen(val width: Int, val height: Int) : GameScreen, IListenToKeyboard {
   private val commander = Commander()
   private var nextFall = 0L
   private var fallRate = 1000L
