@@ -6,13 +6,13 @@ import com.ketris.screens.loading.Screen as LoadingScreen
 
 fun main(args: Array<String>) {
   java.awt.EventQueue.invokeLater {
-    val canvas = Game.create(
+    Game.create(
       screenClass = ::LoadingScreen,
       width = GameConfig.CANVAS_WIDTH,
       height = GameConfig.CANVAS_HEIGHT
     )
 
-    Window(title = "Ketris", canvas = canvas)
+    Window(title = "Ketris", canvas = Game.canvas)
 
     Game.startGameLoop()
   }
