@@ -30,7 +30,7 @@ object Game {
     screen = canvas.screen
   }
 
-  fun startGameLoop() {
+  fun start() {
     val thread = Thread(Runnable { loop() })
     thread.start()
   }

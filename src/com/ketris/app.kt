@@ -14,6 +14,6 @@ fun main(args: Array<String>) {
 
     Window(title = "Ketris", canvas = Game.canvas)
 
-    Game.startGameLoop()
+    Game.start()
   }
 }
