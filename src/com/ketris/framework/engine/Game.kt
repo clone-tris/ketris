@@ -5,11 +5,10 @@ import java.awt.Dimension
 typealias InstantiateScreen = (width: Int, height: Int) -> GameScreen
 
 object Game {
-  private var screen: GameScreen = EmptyScreen()
   var width: Int = 0
   var height: Int = 0
   val canvas = GamePanel(
-    width = width, height = height, screen = screen
+    width = width, height = height, screen = EmptyScreen()
   )
   private var isRunning: Boolean = true
   private var dt: Int = 0
@@ -19,15 +18,13 @@ object Game {
   fun create(screenClass: InstantiateScreen, width: Int, height: Int) {
     Game.width = width
     Game.height = height
-    screen = screenClass(width, height)
-    canvas.screen = screen
+    canvas.screen = screenClass(width, height)
     canvas.preferredSize = Dimension(width, height)
   }
 
   fun useScreen(newScreen: InstantiateScreen) {
     canvas.screen.unload()
     canvas.screen = newScreen(width, height)
-    screen = canvas.screen
   }
 
   fun start() {
@@ -50,7 +47,7 @@ object Game {
     val t = System.currentTimeMillis()
     val deltaTime: Int = (t - timeLastRunMs).toInt()
     dt = deltaTime
-    screen.update(deltaTime)
+    canvas.screen.update(deltaTime)
     timeLastRunMs = t
 
     // asynchronously signals the paint to happen in the swing thread
