@@ -14,17 +14,20 @@ object Game {
   private var dt: Int = 0
   private var timeLastRunMs = System.currentTimeMillis()
   private val redrawLock = Object()
+  val screens = mutableMapOf<InstantiateScreen, GameScreen>()
 
   fun create(screenClass: InstantiateScreen, width: Int, height: Int) {
     Game.width = width
     Game.height = height
     canvas.screen = screenClass(width, height)
     canvas.preferredSize = Dimension(width, height)
+    screens[screenClass] = canvas.screen
   }
 
   fun useScreen(newScreen: InstantiateScreen) {
     canvas.screen.unload()
     canvas.screen = newScreen(width, height)
+    screens[newScreen] = canvas.screen
   }
 
   fun start() {

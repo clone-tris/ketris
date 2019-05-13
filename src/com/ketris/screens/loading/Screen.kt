@@ -18,7 +18,7 @@ class Screen(width: Int, height: Int) : GameScreen,
   IListenToMouse,
   IListenToKeyboard {
   override val painter = Painter(width, height)
-  val startButton = Button(
+  private val startButton = Button(
     text = "Start (S)", x = 6 * Config.SQUARE_WIDTH, y = 17 * Config.SQUARE_WIDTH
   )
   private val colorChangeRate = 500L

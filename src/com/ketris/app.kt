@@ -1,7 +1,6 @@
 package com.ketris
 
 import com.ketris.framework.engine.Game
-import com.ketris.screens.game.playfield.Screen as MainScreen
 import com.ketris.screens.loading.Screen as LoadingScreen
 
 fun main(args: Array<String>) {

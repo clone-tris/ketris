@@ -2,6 +2,7 @@ package com.ketris.screens.game.sidebar
 
 import com.ketris.screens.game.Config.SQUARE_WIDTH
 import com.ketris.screens.game.Score
+import com.ketris.screens.game.UIColors
 import com.ketris.screens.game.playfield.Painter
 import java.awt.Rectangle
 
@@ -9,6 +10,11 @@ open class Painter(width: Int, height: Int) : Painter(width, height) {
   fun background() {
     clear()
     drawSmallGuide()
+  }
+
+  override fun clear() {
+    g.color = UIColors.SIDEBAR_BACKGROUND
+    g.fillRect(0, 0, width, height)
   }
 
   fun drawSmallGuide() {

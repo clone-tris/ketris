@@ -4,6 +4,7 @@ import java.awt.Color
 
 object UIColors {
   val BACKGROUND: Color = Color.decode("#333333")
+  val SIDEBAR_BACKGROUND: Color = Color.decode("#545454")
   val DEFAULT_SQUARE_COLOR: Color = Color.decode("#CC8081")
   val GUIDE: Color = Color.decode("#555555")
 }

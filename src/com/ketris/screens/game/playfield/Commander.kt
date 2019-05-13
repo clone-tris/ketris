@@ -1,11 +1,12 @@
 package com.ketris.screens.game.playfield
 
+import com.ketris.framework.engine.Game
 import com.ketris.screens.game.Config.PUZZLE_HEIGHT
 import com.ketris.screens.game.Config.PUZZLE_WIDTH
 import com.ketris.screens.game.Score
 import com.ketris.screens.game.Shape
 import com.ketris.screens.game.randomTetromino
-import log
+import com.ketris.screens.over.Screen as GameOverScreen
 
 class Commander {
   var player = createPlayer()
@@ -23,9 +24,14 @@ class Commander {
   var gameEnded = false
   var inspect = false
 
+  init {
+    Score.reset()
+    spawnPlayer()
+  }
+
   private fun gameOver() {
-    log("Game Over !")
     gameEnded = true
+    Game.useScreen(::GameOverScreen)
   }
 
   private fun eatPlayer() {

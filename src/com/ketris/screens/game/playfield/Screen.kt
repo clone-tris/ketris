@@ -18,7 +18,7 @@ class Screen(val width: Int, val height: Int) : GameScreen, IListenToKeyboard {
   private var wasAnimating = false
   override val painter = Painter(WAR_ZONE_WIDTH, height)
   private val sideBar = Sidebar(SIDEBAR_WIDTH, height, commander.nextPlayer)
-  private val stitcher = GraphicsPainter(SIDEBAR_WIDTH + WAR_ZONE_WIDTH, height)
+  val stitcher = GraphicsPainter(SIDEBAR_WIDTH + WAR_ZONE_WIDTH, height)
 
   init {
     KeyManager.addListener(this)

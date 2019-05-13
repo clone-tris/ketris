@@ -88,7 +88,7 @@ open class Painter(width: Int, height: Int) : GraphicsPainter(width, height) {
     )
   }
 
-  fun clear() {
+  open fun clear() {
     g.color = BACKGROUND
     g.fillRect(0, 0, width, height)
   }

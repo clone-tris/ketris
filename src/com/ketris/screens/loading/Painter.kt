@@ -1,5 +1,5 @@
 package com.ketris.screens.loading
 
-import com.ketris.screens.game.playfield.Painter as GameScreenPainter
+import com.ketris.screens.game.playfield.Painter as PlayfieldPainter
 
-class Painter(width: Int, height: Int) : GameScreenPainter(width, height)
+class Painter(width: Int, height: Int) : PlayfieldPainter(width, height)
