@@ -17,20 +17,20 @@ class Screen(val width: Int, val height: Int) : GameScreen, IListenToKeyboard {
   override val painter = Painter(SIDEBAR_WIDTH + WAR_ZONE_WIDTH, height)
 
   private val playfield = Playfield(WAR_ZONE_WIDTH, height)
-  private val sidebar = Sidebar(SIDEBAR_WIDTH, height, playfield.commander.nextPlayer)
+  private val sidebar = Sidebar(SIDEBAR_WIDTH, height, playfield.nextPlayer)
 
   init {
     KeyManager.addListener(this)
   }
 
   override fun update(dt: Int) {
-    if (playfield.commander.animating) {
+    if (playfield.animating) {
       wasAnimating = true
     } else if (wasAnimating) {
       nextFall = System.currentTimeMillis() + fallRate
       wasAnimating = false
     }
-    if (!playfield.commander.gameEnded && !wasAnimating) {
+    if (!playfield.gameEnded && !wasAnimating) {
       applyGravity()
     }
   }
@@ -44,22 +44,22 @@ class Screen(val width: Int, val height: Int) : GameScreen, IListenToKeyboard {
   }
 
   private fun handlePlayerFalling() {
-    val weHaveANewPlayer = playfield.commander.fallDown()
+    val weHaveANewPlayer = playfield.fallDown()
     if (weHaveANewPlayer) {
-      sidebar.nextPlayer = playfield.commander.nextPlayer
+      sidebar.nextPlayer = playfield.nextPlayer
     }
   }
 
   override fun keyPressed(e: KeyEvent) {
-    if (!playfield.commander.gameEnded) {
+    if (!playfield.gameEnded) {
       when (e.keyCode) {
-        KeyEvent.VK_W -> playfield.commander.rotatePlayer()
+        KeyEvent.VK_W -> playfield.rotatePlayer()
         KeyEvent.VK_S -> handlePlayerFalling()
-        KeyEvent.VK_A -> playfield.commander.moveLeft()
-        KeyEvent.VK_D -> playfield.commander.moveRight()
-        KeyEvent.VK_R -> playfield.commander.restart()
-        KeyEvent.VK_I -> playfield.commander.inspect = true
-        KeyEvent.VK_P -> playfield.commander.animating = !playfield.commander.animating
+        KeyEvent.VK_A -> playfield.moveLeft()
+        KeyEvent.VK_D -> playfield.moveRight()
+        KeyEvent.VK_R -> playfield.restart()
+        KeyEvent.VK_I -> playfield.inspect = true
+        KeyEvent.VK_P -> playfield.animating = !playfield.animating
       }
     } else {
 
