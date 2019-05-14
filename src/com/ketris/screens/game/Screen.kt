@@ -15,7 +15,7 @@ class Screen(val width: Int, val height: Int) : GameScreen, IListenToKeyboard {
   private var fallRate = 1000L
   private var wasAnimating = false
   override val painter = Painter(SIDEBAR_WIDTH + WAR_ZONE_WIDTH, height)
-
+  private var playerIsFalling = false
   private val playfield = Playfield(WAR_ZONE_WIDTH, height)
   private val sidebar = Sidebar(SIDEBAR_WIDTH, height, playfield.nextPlayer)
 
@@ -44,10 +44,15 @@ class Screen(val width: Int, val height: Int) : GameScreen, IListenToKeyboard {
   }
 
   private fun handlePlayerFalling() {
+    if(playerIsFalling) {
+      return
+    }
+    playerIsFalling = true
     val weHaveANewPlayer = playfield.fallDown()
     if (weHaveANewPlayer) {
       sidebar.nextPlayer = playfield.nextPlayer
     }
+    playerIsFalling = false
   }
 
   override fun keyPressed(e: KeyEvent) {
