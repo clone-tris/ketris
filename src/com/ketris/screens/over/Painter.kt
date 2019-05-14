@@ -8,13 +8,13 @@ import com.ketris.GameConfig.CANVAS_WIDTH
 import com.ketris.UIColors
 import com.ketris.framework.engine.Game
 import com.ketris.framework.engine.Painter
-import com.ketris.screens.game.playfield.Screen as MainScreen
+import com.ketris.screens.game.Screen as MainScreen
 
 class Painter(width: Int, height: Int) : Painter(width, height) {
   fun drawPopup() {
     if (Game.screens.containsKey(::MainScreen)) {
       val mainScreen = Game.screens[::MainScreen] as MainScreen
-      g.drawImage(mainScreen.stitcher.canvas(), 0, 0, width, height, null)
+      g.drawImage(mainScreen.painter.canvas(), 0, 0, width, height, null)
     } else {
       g.color = com.ketris.screens.game.UIColors.BACKGROUND
       g.fillRect(0, 0, width, height)

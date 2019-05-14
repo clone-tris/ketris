@@ -10,7 +10,7 @@ import com.ketris.framework.io.MouseManager
 import com.ketris.screens.game.Config
 import java.awt.event.KeyEvent
 import java.awt.event.MouseEvent
-import com.ketris.screens.game.playfield.Screen as MainGameScreen
+import com.ketris.screens.game.Screen as MainGameScreen
 
 class Screen(width: Int, height: Int) : GameScreen, IListenToMouse, IListenToKeyboard {
   override val painter = Painter(width, height)

@@ -7,7 +7,7 @@ import com.ketris.framework.io.IListenToKeyboard
 import com.ketris.framework.io.IListenToMouse
 import com.ketris.framework.io.KeyManager
 import com.ketris.framework.io.MouseManager
-import com.ketris.screens.game.playfield.Screen as MainGameScreen
+import com.ketris.screens.game.Screen as MainGameScreen
 import com.ketris.screens.game.Shape
 import com.ketris.screens.game.Config
 import com.ketris.screens.game.randomShapeColor
