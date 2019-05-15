@@ -12,10 +12,10 @@ class Window(title: String, canvas: GamePanel) : JFrame(title) {
 
     isVisible = true
     // at home
-    location = Point(1400, 110)
+//    location = Point(1400, 110)
 
     // at work
-//    location = Point(1200, 410)
+    location = Point(1500, 410)
     defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
   }
 }

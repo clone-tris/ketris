@@ -23,7 +23,6 @@ open class GraphicsPainter(val width: Int, val height: Int) {
   }
 
   fun drawNewSquare(x: Int, y: Int) {
-
   }
 
   fun drawButton(
@@ -35,9 +34,7 @@ open class GraphicsPainter(val width: Int, val height: Int) {
   }
 
   fun fillButton(
-    button: Button,
-    background: Color = ShapeColors.CYAN.color,
-    color: Color = Color.decode("#222222")
+    button: Button, background: Color = ShapeColors.CYAN.color, color: Color = Color(0x222222)
   ) {
     g.color = background
     g.fillRoundRect(button.x, button.y, button.width, button.height, 3, 3)
@@ -53,7 +50,7 @@ open class GraphicsPainter(val width: Int, val height: Int) {
   }
 
   fun drawText(
-    text: String, x: Int, y: Int, fontSize: Int = 12, color: Color = Color.decode("#ffffff")
+    text: String, x: Int, y: Int, fontSize: Int = 12, color: Color = Color(0xffffff)
   ) {
     g.color = color
     g.font = Font(Font.MONOSPACED, Font.BOLD, fontSize)

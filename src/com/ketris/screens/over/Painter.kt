@@ -34,7 +34,7 @@ class Painter(width: Int, height: Int) : Painter(width, height) {
     g.color = UIColors.POPUP_BACKGROUND
     g.fillRect(boxX, boxY, boxWidth, boxHeight)
 
-    g.color = Color.decode("#EFEFEF")
+    g.color = Color(0xEFEFEF)
     g.font = font
     g.drawString(message, boxX + padding, boxY + padding + font.size)
   }
