@@ -39,7 +39,6 @@ class Playfield(width: Int, height: Int) : GameScreen {
 
     // keep the following last as it need to be on top of everything
     if (DEBUG_GRAPHICS) {
-      painter.drawFPS()
       painter.drawPlayerInfo(player)
     }
   }
