@@ -1,8 +1,8 @@
 package com.ketris.screens.game
 
 object Config {
-  const val SQUARE_WIDTH = 20
-  const val SQUARE_BORDER_WIDTH = 2
+  const val SQUARE_WIDTH = 24
+  const val SQUARE_BORDER_WIDTH = 1
   const val PUZZLE_WIDTH = 10
   const val PUZZLE_HEIGHT = 20
 
