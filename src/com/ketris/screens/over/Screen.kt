@@ -12,8 +12,8 @@ import java.awt.event.KeyEvent
 import java.awt.event.MouseEvent
 import com.ketris.screens.game.Screen as MainGameScreen
 
-class Screen(width: Int, height: Int) : GameScreen, IListenToMouse, IListenToKeyboard {
-  override val painter = Painter(width, height)
+class Screen : GameScreen, IListenToMouse, IListenToKeyboard {
+  override val painter = Painter(Game.width, Game.height)
   private val restartButton = Button(
     text = "Restart (R)", x = 6 * Config.SQUARE_WIDTH, y = 17 * Config.SQUARE_WIDTH
   )

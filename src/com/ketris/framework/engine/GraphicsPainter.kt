@@ -22,6 +22,10 @@ open class GraphicsPainter(val width: Int, val height: Int) {
     return buffer
   }
 
+  fun drawNewSquare(x: Int, y: Int) {
+
+  }
+
   fun drawButton(
     button: Button, color: Color = ShapeColors.CYAN.color
   ) {

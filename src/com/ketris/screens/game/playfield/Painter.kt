@@ -17,11 +17,6 @@ open class Painter(width: Int, height: Int) : GraphicsPainter(width, height) {
     drawGuide()
   }
 
-  fun drawFPS() {
-//    val fps = fps.value().toString()
-//    drawText(text = "FPS : $fps", x = 10, y = 10)
-  }
-
   fun drawPlayerInfo(player: Shape) {
     drawText(text = "r/c ${player.row}, ${player.column}", x = 10, y = 25)
   }

@@ -1,14 +1,16 @@
 package com.ketris.framework.engine
 
+import com.ketris.GameConfig.CANVAS_HEIGHT
+import com.ketris.GameConfig.CANVAS_WIDTH
 import java.awt.Dimension
 
-typealias InstantiateScreen = (width: Int, height: Int) -> GameScreen
+typealias InstantiateScreen = () -> GameScreen
 
 object Game {
   var width: Int = 0
   var height: Int = 0
   val canvas = GamePanel(
-    width = width, height = height, screen = EmptyScreen()
+    width = CANVAS_WIDTH, height = CANVAS_HEIGHT, screen = EmptyScreen()
   )
   private var isRunning: Boolean = true
   private var dt: Int = 0
@@ -19,14 +21,14 @@ object Game {
   fun create(screenClass: InstantiateScreen, width: Int, height: Int) {
     Game.width = width
     Game.height = height
-    canvas.screen = screenClass(width, height)
+    canvas.screen = screenClass()
     canvas.preferredSize = Dimension(width, height)
     screens[screenClass] = canvas.screen
   }
 
   fun useScreen(newScreen: InstantiateScreen) {
     canvas.screen.unload()
-    canvas.screen = newScreen(width, height)
+    canvas.screen = newScreen()
     screens[newScreen] = canvas.screen
   }
 

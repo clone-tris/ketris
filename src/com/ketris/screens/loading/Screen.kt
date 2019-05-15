@@ -14,10 +14,10 @@ import com.ketris.screens.game.randomShapeColor
 import java.awt.event.KeyEvent
 import java.awt.event.MouseEvent
 
-class Screen(width: Int, height: Int) : GameScreen,
+class Screen : GameScreen,
   IListenToMouse,
   IListenToKeyboard {
-  override val painter = Painter(width, height)
+  override val painter = Painter(Game.width, Game.height)
   private val startButton = Button(
     text = "Start (S)", x = 6 * Config.SQUARE_WIDTH, y = 17 * Config.SQUARE_WIDTH
   )

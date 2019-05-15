@@ -1,5 +1,6 @@
 package com.ketris.screens.game
 
+import com.ketris.framework.engine.Game
 import com.ketris.framework.engine.GameScreen
 import com.ketris.framework.io.IListenToKeyboard
 import com.ketris.framework.io.KeyManager
@@ -10,14 +11,14 @@ import com.ketris.screens.game.sidebar.Sidebar
 import java.awt.event.KeyEvent
 import java.awt.image.BufferedImage
 
-class Screen(val width: Int, val height: Int) : GameScreen, IListenToKeyboard {
+class Screen : GameScreen, IListenToKeyboard {
   private var nextFall = 0L
   private var fallRate = 1000L
   private var wasAnimating = false
-  override val painter = Painter(SIDEBAR_WIDTH + WAR_ZONE_WIDTH, height)
+  override val painter = Painter(SIDEBAR_WIDTH + WAR_ZONE_WIDTH, Game.height)
   private var playerIsFalling = false
-  private val playfield = Playfield(WAR_ZONE_WIDTH, height)
-  private val sidebar = Sidebar(SIDEBAR_WIDTH, height, playfield.nextPlayer)
+  private val playfield = Playfield(WAR_ZONE_WIDTH, Game.height)
+  private val sidebar = Sidebar(SIDEBAR_WIDTH, Game.height, playfield.nextPlayer)
 
   init {
     KeyManager.addListener(this)
@@ -44,7 +45,7 @@ class Screen(val width: Int, val height: Int) : GameScreen, IListenToKeyboard {
   }
 
   private fun handlePlayerFalling() {
-    if(playerIsFalling) {
+    if (playerIsFalling) {
       return
     }
     playerIsFalling = true
@@ -80,8 +81,8 @@ class Screen(val width: Int, val height: Int) : GameScreen, IListenToKeyboard {
     val playfieldBuffer = playfield.paintCanvas()
     val sidebarBuffer = sidebar.paintCanvas()
 
-    painter.g.drawImage(sidebarBuffer, 0, 0, SIDEBAR_WIDTH, height, null)
-    painter.g.drawImage(playfieldBuffer, SIDEBAR_WIDTH, 0, WAR_ZONE_WIDTH, height, null)
+    painter.g.drawImage(sidebarBuffer, 0, 0, SIDEBAR_WIDTH, Game.height, null)
+    painter.g.drawImage(playfieldBuffer, SIDEBAR_WIDTH, 0, WAR_ZONE_WIDTH, Game.height, null)
 
     return painter.canvas()
   }
