@@ -11,7 +11,7 @@ import com.ketris.screens.over.Screen as GameOverScreen
 
 class Playfield(width: Int, height: Int) : GameScreen {
   override val painter = Painter(width, height)
-
+  var fallRate = 1000L
   private var player = createPlayer()
   var nextPlayer = createPlayer()
   private val opponent = Shape(
@@ -54,7 +54,11 @@ class Playfield(width: Int, height: Int) : GameScreen {
     if (linesRemoved == 0) {
       return
     }
+    val currentLevel = Score.level
     applyScore(linesRemoved)
+    if (currentLevel != Score.level) {
+      fallRate -= fallRate / 3
+    }
   }
 
   private fun applyScore(linesRemoved: Int) {

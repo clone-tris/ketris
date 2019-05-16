@@ -13,7 +13,6 @@ import java.awt.image.BufferedImage
 
 class Screen : GameScreen, IListenToKeyboard {
   private var nextFall = 0L
-  private var fallRate = 1000L
   private var wasAnimating = false
   override val painter = Painter(SIDEBAR_WIDTH + WAR_ZONE_WIDTH, Game.height)
   private var playerIsFalling = false
@@ -28,7 +27,7 @@ class Screen : GameScreen, IListenToKeyboard {
     if (playfield.animating) {
       wasAnimating = true
     } else if (wasAnimating) {
-      nextFall = System.currentTimeMillis() + fallRate
+      nextFall = System.currentTimeMillis() + playfield.fallRate
       wasAnimating = false
     }
     if (!playfield.gameEnded && !wasAnimating) {
@@ -39,7 +38,7 @@ class Screen : GameScreen, IListenToKeyboard {
   private fun applyGravity() {
     val time = System.currentTimeMillis()
     if (time >= nextFall) {
-      nextFall = time + fallRate
+      nextFall = time + playfield.fallRate
       handlePlayerFalling()
     }
   }
