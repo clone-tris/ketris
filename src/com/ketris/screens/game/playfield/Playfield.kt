@@ -140,14 +140,11 @@ class Playfield(width: Int, height: Int) : GameScreen {
     val movedSuccessfuly = !futurePlayer.collidesWith(opponent) && futurePlayer.withinBounds()
     if (movedSuccessfuly) {
       player = futurePlayer
-    } else {
-      if (rowDirection == +1) {
-        eatPlayer()
-        spawnPlayer()
-        if (player.collidesWith(opponent)) {
-          gameOver()
-          return false
-        }
+    } else if (rowDirection == +1) {
+      eatPlayer()
+      spawnPlayer()
+      if (player.collidesWith(opponent)) {
+        gameOver()
       }
     }
     return movedSuccessfuly
