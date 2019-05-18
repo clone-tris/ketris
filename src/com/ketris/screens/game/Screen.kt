@@ -30,7 +30,7 @@ class Screen : GameScreen, IListenToKeyboard {
       nextFall = System.currentTimeMillis() + playfield.fallRate
       wasAnimating = false
     }
-    if (!playfield.gameEnded && !wasAnimating) {
+    if (!wasAnimating) {
       applyGravity()
     }
   }
@@ -56,18 +56,14 @@ class Screen : GameScreen, IListenToKeyboard {
   }
 
   override fun keyPressed(e: KeyEvent) {
-    if (!playfield.gameEnded) {
-      when (e.keyCode) {
-        KeyEvent.VK_W -> playfield.rotatePlayer()
-        KeyEvent.VK_S -> handlePlayerFalling()
-        KeyEvent.VK_A -> playfield.moveLeft()
-        KeyEvent.VK_D -> playfield.moveRight()
-        KeyEvent.VK_R -> playfield.restart()
-        KeyEvent.VK_I -> playfield.inspect = true
-        KeyEvent.VK_P -> playfield.animating = !playfield.animating
-      }
-    } else {
-
+    when (e.keyCode) {
+      KeyEvent.VK_W -> playfield.rotatePlayer()
+      KeyEvent.VK_S -> handlePlayerFalling()
+      KeyEvent.VK_A -> playfield.moveLeft()
+      KeyEvent.VK_D -> playfield.moveRight()
+      KeyEvent.VK_R -> playfield.restart()
+      KeyEvent.VK_I -> playfield.inspect = true
+      KeyEvent.VK_P -> playfield.animating = !playfield.animating
     }
   }
 

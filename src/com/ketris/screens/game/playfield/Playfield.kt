@@ -12,7 +12,7 @@ import com.ketris.screens.over.Screen as GameOverScreen
 class Playfield(width: Int, height: Int) : GameScreen {
   override val painter = Painter(width, height)
   var fallRate = 1000L
-  private var player = createPlayer()
+  var player = createPlayer()
   var nextPlayer = createPlayer()
   private val opponent = Shape(
     grid = emptyList(),
@@ -24,7 +24,6 @@ class Playfield(width: Int, height: Int) : GameScreen {
   )
 
   var animating = false
-  var gameEnded = false
   var inspect = false
 
   init {
@@ -44,7 +43,6 @@ class Playfield(width: Int, height: Int) : GameScreen {
   }
 
   private fun gameOver() {
-    gameEnded = true
     Game.useScreen(::GameOverScreen)
   }
 
