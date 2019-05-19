@@ -9,6 +9,7 @@ typealias InstantiateScreen = () -> GameScreen
 object Game {
   var width: Int = 0
   var height: Int = 0
+  var paused: Boolean = false
   val canvas = GamePanel(
     width = CANVAS_WIDTH, height = CANVAS_HEIGHT, screen = EmptyScreen()
   )
@@ -32,6 +33,10 @@ object Game {
     screens[newScreen] = canvas.screen
   }
 
+  fun togglePaused() {
+    paused = !paused
+  }
+
   fun start() {
     val thread = Thread(Runnable { loop() })
     thread.start()
@@ -39,9 +44,9 @@ object Game {
 
   private fun loop() {
     while (isRunning) {
-      val durationMs = redraw()
+      val redrawDuration = if (paused) 0 else redraw()
       try {
-        Thread.sleep(Math.max(0, REFRESH_INTERVAL_MS - durationMs))
+        Thread.sleep(Math.max(0, REFRESH_INTERVAL_MS - redrawDuration))
       } catch (e: InterruptedException) {
         e.printStackTrace()
       }

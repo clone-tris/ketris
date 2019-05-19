@@ -63,7 +63,7 @@ class Screen : GameScreen, IListenToKeyboard {
       KeyEvent.VK_D -> playfield.moveRight()
       KeyEvent.VK_R -> playfield.restart()
       KeyEvent.VK_I -> playfield.inspect = true
-      KeyEvent.VK_P -> playfield.animating = !playfield.animating
+      KeyEvent.VK_P -> Game.togglePaused()
     }
   }
 
