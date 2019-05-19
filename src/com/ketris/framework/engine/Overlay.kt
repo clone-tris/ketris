@@ -1,11 +1,9 @@
 package com.ketris.framework.engine
 
-import com.ketris.screens.game.playfield.Painter
-
-class Overlay(width: Int, height: Int) : GameScreen {
-  override val painter = Painter(width, height)
-
+class Overlay : GameScreen {
+  override val painter = OverlayPainter(Game.width, Game.height)
+  var fps = GameFPS()
   override fun paint() {
-    // Smoothing up things so that we get good graphics instead of pixely things
+    painter.drawFPS(fps.value())
   }
 }

@@ -7,8 +7,8 @@ import java.awt.Dimension
 typealias InstantiateScreen = () -> GameScreen
 
 object Game {
-  var width: Int = 0
-  var height: Int = 0
+  var width: Int = 1
+  var height: Int = 1
   var paused: Boolean = false
   val canvas = GamePanel(
     width = CANVAS_WIDTH, height = CANVAS_HEIGHT, screen = EmptyScreen()
@@ -24,6 +24,8 @@ object Game {
     Game.height = height
     canvas.screen = screenClass()
     canvas.preferredSize = Dimension(width, height)
+    canvas.overlay = Overlay()
+
     screens[screenClass] = canvas.screen
   }
 
