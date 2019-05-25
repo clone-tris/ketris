@@ -18,12 +18,17 @@ class Screen : GameScreen, IListenToKeyboard {
   private var playerIsFalling = false
   private val playfield = Playfield(WAR_ZONE_WIDTH, Game.height)
   private val sidebar = Sidebar(SIDEBAR_WIDTH, Game.height, playfield.nextPlayer)
+  private var paused = false
+  private var remainingAfterPaused = 0L
 
   init {
     KeyManager.addListener(this)
   }
 
   override fun update(dt: Int) {
+    if (paused) {
+      return
+    }
     if (playfield.animating) {
       wasAnimating = true
     } else if (wasAnimating) {
@@ -56,14 +61,31 @@ class Screen : GameScreen, IListenToKeyboard {
   }
 
   override fun keyPressed(e: KeyEvent) {
-    when (e.keyCode) {
-      KeyEvent.VK_W -> playfield.rotatePlayer()
-      KeyEvent.VK_S -> handlePlayerFalling()
-      KeyEvent.VK_A -> playfield.moveLeft()
-      KeyEvent.VK_D -> playfield.moveRight()
-      KeyEvent.VK_R -> playfield.restart()
-      KeyEvent.VK_I -> playfield.inspect = true
-      KeyEvent.VK_P -> Game.togglePaused()
+    if (paused) {
+      when (e.keyCode) {
+        KeyEvent.VK_P -> togglePaused()
+      }
+    } else {
+      when (e.keyCode) {
+        KeyEvent.VK_W -> playfield.rotatePlayer()
+        KeyEvent.VK_S -> handlePlayerFalling()
+        KeyEvent.VK_A -> playfield.moveLeft()
+        KeyEvent.VK_D -> playfield.moveRight()
+        KeyEvent.VK_R -> playfield.restart()
+        KeyEvent.VK_I -> playfield.inspect = true
+        KeyEvent.VK_P -> togglePaused()
+      }
+    }
+  }
+
+  private fun togglePaused() {
+    paused = !paused
+    val time = System.currentTimeMillis()
+    if (paused) {
+      val remaining = nextFall - time
+      remainingAfterPaused = if (remaining >= 0) remaining else 0
+    } else {
+      nextFall = time + remainingAfterPaused
     }
   }
 
