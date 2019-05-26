@@ -12,6 +12,9 @@ import com.ketris.screens.over.Screen as GameOverScreen
 class Playfield(width: Int, height: Int) : GameScreen {
   override val painter = Painter(width, height)
   var fallRate = 1000L
+  val floorRate = 500L
+  var onFloor = false
+  var endOfLock = 0L
   var player = createPlayer()
   var nextPlayer = createPlayer()
   private val opponent = Shape(
@@ -136,18 +139,35 @@ class Playfield(width: Int, height: Int) : GameScreen {
 
   private fun movePlayer(rowDirection: Int, columnDirection: Int): Boolean {
     val foreshadow = player.copy()
+    val movingDown = rowDirection == +1
     foreshadow.move(rowDirection, columnDirection)
     val ableToMove = !foreshadow.collidesWith(opponent) && foreshadow.withinBounds()
     if (ableToMove) {
       player = foreshadow
-    } else if (rowDirection == +1) {
-      eatPlayer()
-      spawnPlayer()
-      if (player.collidesWith(opponent)) {
-        gameOver()
+      if (movingDown) {
+        onFloor = false
       }
+    } else if (movingDown) {
+      handleFallingDown()
     }
     return ableToMove
+  }
+
+  fun handleFallingDown() {
+    val time = System.currentTimeMillis()
+    if (!onFloor) {
+      onFloor = true
+      endOfLock = time + floorRate
+      return
+    } else if (time < endOfLock) {
+      return
+    }
+
+    eatPlayer()
+    spawnPlayer()
+    if (player.collidesWith(opponent)) {
+      gameOver()
+    }
   }
 
   fun moveRight() {
