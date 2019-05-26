@@ -53,8 +53,8 @@ class Screen : GameScreen, IListenToKeyboard {
       return
     }
     playerIsFalling = true
-    val weHaveANewPlayer = playfield.fallDown()
-    if (weHaveANewPlayer) {
+    val ableToMove = playfield.fallDown()
+    if (!ableToMove) {
       sidebar.nextPlayer = playfield.nextPlayer
     }
     playerIsFalling = false

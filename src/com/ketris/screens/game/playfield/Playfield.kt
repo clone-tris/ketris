@@ -126,20 +126,20 @@ class Playfield(width: Int, height: Int) : GameScreen {
   }
 
   fun rotatePlayer() {
-    val futurePlayer = player.copy()
-    futurePlayer.rotate()
-    if (futurePlayer.collidesWith(opponent) || !futurePlayer.withinBounds()) {
+    val foreshadow = player.copy()
+    foreshadow.rotate()
+    if (foreshadow.collidesWith(opponent) || !foreshadow.withinBounds()) {
       return
     }
-    player = futurePlayer
+    player = foreshadow
   }
 
   private fun movePlayer(rowDirection: Int, columnDirection: Int): Boolean {
-    val futurePlayer = player.copy()
-    futurePlayer.move(rowDirection, columnDirection)
-    val movedSuccessfuly = !futurePlayer.collidesWith(opponent) && futurePlayer.withinBounds()
-    if (movedSuccessfuly) {
-      player = futurePlayer
+    val foreshadow = player.copy()
+    foreshadow.move(rowDirection, columnDirection)
+    val ableToMove = !foreshadow.collidesWith(opponent) && foreshadow.withinBounds()
+    if (ableToMove) {
+      player = foreshadow
     } else if (rowDirection == +1) {
       eatPlayer()
       spawnPlayer()
@@ -147,7 +147,7 @@ class Playfield(width: Int, height: Int) : GameScreen {
         gameOver()
       }
     }
-    return movedSuccessfuly
+    return ableToMove
   }
 
   fun moveRight() {
@@ -159,10 +159,10 @@ class Playfield(width: Int, height: Int) : GameScreen {
   }
 
   fun fallDown(): Boolean {
-    val diIMoveThough = movePlayer(+1, 0)
+    val ableToMove = movePlayer(+1, 0)
     if (inspect) {
       inspect = false
     }
-    return diIMoveThough
+    return ableToMove
   }
 }
