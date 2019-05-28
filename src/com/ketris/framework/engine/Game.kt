@@ -55,7 +55,6 @@ object Game {
     val deltaTime: Int = (t - timeLastRunMs).toInt()
     dt = deltaTime
     canvas.screen.update(deltaTime)
-    timeLastRunMs = t
 
     // asynchronously signals the paint to happen in the swing thread
     canvas.repaint()
@@ -63,9 +62,10 @@ object Game {
     // use a lock here that is only released once the paintComponent
     // has happened so that canvas.repaint() calls don't queue up that
     // are delayed and we get jerky drawing
+    timeLastRunMs =  System.currentTimeMillis()
     waitForPaint()
 
-    return System.currentTimeMillis() - t
+    return timeLastRunMs - t
   }
 
   private fun waitForPaint() {
