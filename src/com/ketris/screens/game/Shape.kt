@@ -24,7 +24,7 @@ class Shape(
     if (computeHeight) {
       computeSize()
     }
-    grid.forEach { square -> square.color = color }
+    this.color = color
   }
 
   private fun computeSize() {
