@@ -96,8 +96,9 @@ class Screen : GameScreen, IListenToKeyboard {
   }
 
   override fun paintCanvas(): BufferedImage {
-    val playfieldBuffer = playfield.paintCanvas()
-    val sidebarBuffer = sidebar.paintCanvas()
+    paint()
+    val playfieldBuffer = playfield.painter.canvas()
+    val sidebarBuffer = sidebar.painter.canvas()
 
     painter.g.drawImage(sidebarBuffer, 0, 0, SIDEBAR_WIDTH, Game.height, null)
     painter.g.drawImage(playfieldBuffer, SIDEBAR_WIDTH, 0, WAR_ZONE_WIDTH, Game.height, null)
