@@ -8,7 +8,7 @@ import java.awt.Toolkit
 import java.util.concurrent.TimeUnit
 import javax.swing.JPanel
 
-const val FRAMES_PER_SECOND = 60
+const val FRAMES_PER_SECOND = 120
 val REFRESH_INTERVAL_MS: Long = TimeUnit.SECONDS.toMillis(1) / FRAMES_PER_SECOND
 
 class GamePanel(width: Int, height: Int, var screen: GameScreen) : JPanel() {
