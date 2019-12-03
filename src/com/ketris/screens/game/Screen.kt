@@ -12,12 +12,12 @@ import java.awt.event.KeyEvent
 import java.awt.image.BufferedImage
 
 class Screen : GameScreen, IListenToKeyboard {
-  private var nextFall = 0L
-  private var wasAnimating = false
   override val painter = Painter(SIDEBAR_WIDTH + WAR_ZONE_WIDTH, Game.height)
-  private var playerIsFalling = false
   private val playfield = Playfield(WAR_ZONE_WIDTH, Game.height)
   private val sidebar = Sidebar(SIDEBAR_WIDTH, Game.height, playfield.nextPlayer)
+  private var nextFall = 0L
+  private var wasAnimating = false
+  private var playerIsFalling = false
   private var paused = false
   private var remainingAfterPaused = 0L
 
