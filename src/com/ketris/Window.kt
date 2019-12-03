@@ -11,6 +11,7 @@ class Window(title: String, canvas: GamePanel) : JFrame(title) {
     pack()
 
     isVisible = true
+    isResizable = false
     // at home
 //    location = Point(1400, 110)
 
