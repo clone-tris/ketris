@@ -25,13 +25,18 @@ class GamePanel(width: Int, height: Int, var screen: GameScreen) : JPanel() {
   override fun paintComponent(g: Graphics) {
     super.paintComponent(g)
     val layers = listOf(
-      // layer 1 : current screen
-      screen,
-      // layer 2 overlay on top to show information about the game
-      overlay
+        // layer 1 : current screen
+        screen,
+        // layer 2 overlay on top to show information about the game
+        overlay
     )
     // render all game layers
-    layers.forEach { layer -> g.drawImage(layer.paintCanvas(), 0, 0, width, height, null) }
+    layers.forEach { layer ->
+      run {
+        layer.paint()
+        g.drawImage(layer.canvas(), 0, 0, width, height, null)
+      }
+    }
 
     overlay.fps.increment()
 

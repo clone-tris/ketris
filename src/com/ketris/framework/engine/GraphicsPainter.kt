@@ -7,7 +7,7 @@ import java.awt.image.IndexColorModel
 import com.ketris.screens.game.ShapeColors
 
 open class GraphicsPainter(val width: Int, val height: Int) {
-  private val buffer = BufferedImage(width, height, IndexColorModel.TRANSLUCENT)
+  val buffer = BufferedImage(width, height, IndexColorModel.TRANSLUCENT)
   val g = buffer.graphics as Graphics2D
 
   init {
@@ -16,13 +16,6 @@ open class GraphicsPainter(val width: Int, val height: Int) {
     )
     rh[RenderingHints.KEY_RENDERING] = RenderingHints.VALUE_RENDER_QUALITY
     g.setRenderingHints(rh)
-  }
-
-  fun canvas(): BufferedImage {
-    return buffer
-  }
-
-  fun drawNewSquare(x: Int, y: Int) {
   }
 
   fun drawButton(

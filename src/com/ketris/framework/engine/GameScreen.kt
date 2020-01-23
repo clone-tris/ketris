@@ -10,9 +10,8 @@ interface GameScreen {
   fun update(dt: Int) {}
 
   fun paint()
-  fun paintCanvas(): BufferedImage {
-    paint()
-    return painter.canvas()
+  fun canvas(): BufferedImage {
+    return painter.buffer
   }
 
   fun unload() {}
