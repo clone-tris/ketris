@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 import javax.swing.JPanel
 
 const val FRAMES_PER_SECOND = 120
-val REFRESH_INTERVAL_MS: Long = TimeUnit.SECONDS.toMillis(1) / FRAMES_PER_SECOND
+val FRAME_SIZE: Long = TimeUnit.SECONDS.toMillis(1) / FRAMES_PER_SECOND
 
 class GamePanel(width: Int, height: Int, var screen: GameScreen) : JPanel() {
   var overlay = Overlay()
@@ -24,8 +24,6 @@ class GamePanel(width: Int, height: Int, var screen: GameScreen) : JPanel() {
 
   override fun paintComponent(g: Graphics) {
     super.paintComponent(g)
-    Game.clearRedrawLock()
-
     val layers = listOf(
       // layer 1 : current screen
       screen,

@@ -10,12 +10,11 @@ object Game {
   var width: Int = 1
   var height: Int = 1
   val canvas = GamePanel(
-    width = CANVAS_WIDTH, height = CANVAS_HEIGHT, screen = EmptyScreen()
+      width = CANVAS_WIDTH, height = CANVAS_HEIGHT, screen = EmptyScreen()
   )
   private var isRunning: Boolean = true
   private var dt: Int = 0
   private var timeLastRunMs = System.currentTimeMillis()
-  private val redrawLock = Object()
   val screens = mutableMapOf<InstantiateScreen, GameScreen>()
 
   fun create(screenClass: InstantiateScreen, width: Int, height: Int) {
@@ -43,7 +42,10 @@ object Game {
     while (isRunning) {
       val redrawDuration = redraw()
       try {
-        Thread.sleep(Math.max(0, REFRESH_INTERVAL_MS - redrawDuration))
+        val sleepDuration = FRAME_SIZE - redrawDuration
+        if (sleepDuration > 0) {
+          Thread.sleep(sleepDuration)
+        }
       } catch (e: InterruptedException) {
         e.printStackTrace()
       }
@@ -51,35 +53,12 @@ object Game {
   }
 
   private fun redraw(): Long {
-    val t = System.currentTimeMillis()
-    val deltaTime: Int = (t - timeLastRunMs).toInt()
-    dt = deltaTime
-    canvas.screen.update(deltaTime)
-
-    // asynchronously signals the paint to happen in the swing thread
+    val beforeUpdate = System.currentTimeMillis()
+    val dt: Int = (beforeUpdate - timeLastRunMs).toInt()
+    this.dt = dt
+    canvas.screen.update(dt)
     canvas.repaint()
-
-    // use a lock here that is only released once the paintComponent
-    // has happened so that canvas.repaint() calls don't queue up that
-    // are delayed and we get jerky drawing
-    timeLastRunMs =  System.currentTimeMillis()
-    waitForPaint()
-
-    return timeLastRunMs - t
-  }
-
-  private fun waitForPaint() {
-    try {
-      synchronized(redrawLock) {
-        redrawLock.wait()
-      }
-    } catch (e: InterruptedException) {
-    }
-  }
-
-  fun clearRedrawLock() {
-    synchronized(redrawLock) {
-      redrawLock.notify()
-    }
+    timeLastRunMs = System.currentTimeMillis()
+    return timeLastRunMs - beforeUpdate
   }
 }
